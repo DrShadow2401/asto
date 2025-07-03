@@ -13,7 +13,7 @@ interface Star {
   color: string;
 }
 
-const Starfield = ({ count = 500 }: { count?: number }) => {
+const Starfield = ({ count = 1000 }: { count?: number }) => {
   const [stars, setStars] = useState<Star[]>([]);
 
   useEffect(() => {
@@ -29,8 +29,8 @@ const Starfield = ({ count = 500 }: { count?: number }) => {
           x: Math.random() * width,
           y: Math.random() * height,
           size: Math.random() * 2 + 0.5,
-          delay: Math.random() * 5,
-          duration: Math.random() * 15 + 10,
+          delay: Math.random() * 15,
+          duration: Math.random() * 10 + 5,
           color: colors[Math.floor(Math.random() * colors.length)],
         });
       }
@@ -43,7 +43,7 @@ const Starfield = ({ count = 500 }: { count?: number }) => {
   }, [count]);
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden bg-background">
+    <div className="fixed inset-0 z-0 overflow-hidden bg-background">
       {stars.map((star) => (
         <div
           key={star.id}
