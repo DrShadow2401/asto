@@ -33,6 +33,11 @@ const features = [
   },
 ];
 
+const carouselOptions = {
+  align: "center" as const,
+  loop: true,
+};
+
 const FeatureSection = ({ show }: { show: boolean }) => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [styles, setStyles] = React.useState<React.CSSProperties[]>([]);
@@ -44,7 +49,7 @@ const FeatureSection = ({ show }: { show: boolean }) => {
     const newStyles = api.scrollSnapList().map((scrollSnap) => {
       let diff = scrollSnap - scrollProgress;
 
-      if (api.options().loop) {
+      if (carouselOptions.loop) {
         if (diff > 0.5) diff -= 1;
         if (diff < -0.5) diff += 1;
       }
@@ -82,24 +87,21 @@ const FeatureSection = ({ show }: { show: boolean }) => {
     >
       <div
         className={cn(
-          "w-full max-w-2xl opacity-0 transform-gpu",
+          "w-full max-w-4xl opacity-0 transform-gpu",
           show && "animate-fade-in-up"
         )}
         style={{ animationDelay: '200ms' }}
       >
         <Carousel
           setApi={setApi}
-          opts={{
-            align: "center",
-            loop: true,
-          }}
+          opts={carouselOptions}
           className="w-full"
         >
           <CarouselContent className="-ml-4 py-4">
             {features.map((feature, index) => (
               <CarouselItem 
                 key={index} 
-                className="pl-4 basis-full md:basis-2/3 lg:basis-2/3 transition-transform duration-200 ease-out"
+                className="pl-4 basis-full md:basis-1/2 lg:basis-1/2 transition-transform duration-200 ease-out"
                 style={styles[index]}
               >
                 <a href={feature.href} target="_blank" rel="noopener noreferrer" className="block h-full group">
