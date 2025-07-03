@@ -68,7 +68,7 @@ const FeatureSection = ({ show }: { show: boolean }) => {
     >
       <div
         className={cn(
-          "w-full max-w-4xl opacity-0 transform-gpu",
+          "w-full max-w-6xl opacity-0 transform-gpu",
           show && "animate-fade-in-up"
         )}
         style={{ animationDelay: '200ms' }}
@@ -81,33 +81,33 @@ const FeatureSection = ({ show }: { show: boolean }) => {
           }}
           className="w-full"
         >
-          <CarouselContent className="-ml-4 py-4">
+          <CarouselContent className="-ml-8 py-4">
             {features.map((feature, index) => (
               <CarouselItem 
                 key={index} 
                 className={cn(
-                  "pl-4 basis-full md:basis-1/2 lg:basis-1/3 transition-all duration-300 ease-in-out",
+                  "pl-8 basis-4/5 md:basis-2/3 lg:basis-1/2 transition-all duration-300 ease-in-out",
                   index === current 
                     ? "scale-100 opacity-100" 
-                    : "scale-85 opacity-50"
+                    : "scale-90 opacity-60"
                 )}
               >
                 <Card className="h-full bg-card/60 backdrop-blur-sm border-white/10 transition-all duration-300 hover:border-accent hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] overflow-hidden rounded-lg flex flex-col">
-                  <CardContent className="flex-grow flex flex-col items-center justify-center p-4 md:p-6 aspect-[4/3]">
-                    <div className="flex items-center justify-center gap-4 mb-4">
-                      {feature.icon && <feature.icon className="w-8 h-8 md:w-10 md:h-10 text-primary shrink-0" />}
-                      <h3 className="text-xl md:text-2xl font-bold text-primary-foreground text-center">
+                  <CardContent className="flex-grow flex flex-col items-center justify-center p-6 md:p-8 aspect-[4/3]">
+                    <div className="flex items-center justify-center gap-4 mb-6">
+                      {feature.icon && <feature.icon className="w-10 h-10 md:w-12 md:h-12 text-primary shrink-0" />}
+                      <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground text-center">
                         {feature.title}
                       </h3>
                     </div>
-                    <CardDescription className="text-foreground/90 text-center mb-4 text-sm md:text-base">
+                    <CardDescription className="text-foreground/90 text-center mb-6 text-base md:text-lg">
                       {feature.description}
                     </CardDescription>
                     <a
                       href={feature.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-auto text-accent underline underline-offset-4 font-semibold transition-colors hover:text-primary"
+                      className="mt-auto text-accent underline underline-offset-4 font-semibold transition-colors hover:text-primary text-base"
                     >
                       View Project
                     </a>
