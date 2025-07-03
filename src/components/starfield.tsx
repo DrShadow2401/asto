@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { cn } from "@/lib/utils";
 
 interface Star {
   id: number;
@@ -9,6 +10,7 @@ interface Star {
   size: number;
   delay: number;
   duration: number;
+  color: string;
 }
 
 const Starfield = ({ count = 150 }: { count?: number }) => {
@@ -19,14 +21,17 @@ const Starfield = ({ count = 150 }: { count?: number }) => {
       const newStars: Star[] = [];
       const width = window.innerWidth;
       const height = window.innerHeight;
+      const colors = ["bg-white/80", "bg-primary/50", "bg-accent/50"];
+
       for (let i = 0; i < count; i++) {
         newStars.push({
           id: i,
           x: Math.random() * width,
           y: Math.random() * height,
-          size: Math.random() * 1.5 + 0.5,
+          size: Math.random() * 2 + 0.5,
           delay: Math.random() * 5,
           duration: Math.random() * 5 + 3,
+          color: colors[Math.floor(Math.random() * colors.length)],
         });
       }
       setStars(newStars);
@@ -42,7 +47,7 @@ const Starfield = ({ count = 150 }: { count?: number }) => {
       {stars.map((star) => (
         <div
           key={star.id}
-          className="absolute rounded-full bg-white/80 animate-star-twinkle"
+          className={cn("absolute rounded-full animate-star-twinkle", star.color)}
           style={{
             left: `${star.x}px`,
             top: `${star.y}px`,
