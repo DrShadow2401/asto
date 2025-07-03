@@ -30,7 +30,7 @@ const Starfield = ({ count = 150 }: { count?: number }) => {
           y: Math.random() * height,
           size: Math.random() * 2 + 0.5,
           delay: Math.random() * 5,
-          duration: Math.random() * 5 + 3,
+          duration: Math.random() * 10 + 5,
           color: colors[Math.floor(Math.random() * colors.length)],
         });
       }
