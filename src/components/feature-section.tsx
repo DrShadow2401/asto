@@ -86,10 +86,10 @@ const FeatureSection = ({ show }: { show: boolean }) => {
               <CarouselItem 
                 key={index} 
                 className={cn(
-                  "pl-4 basis-full md:basis-1/2 lg:basis-1/3 transition-all duration-300 ease-in-out",
+                  "pl-4 basis-full md:basis-1/3 transition-all duration-300 ease-in-out",
                   index === current 
                     ? "scale-100 opacity-100" 
-                    : "scale-90 opacity-60"
+                    : "scale-85 opacity-50"
                 )}
               >
                 <Card className="h-full bg-card/60 backdrop-blur-sm border-white/10 transition-all duration-300 hover:border-accent hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] overflow-hidden rounded-lg flex flex-col">
