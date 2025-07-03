@@ -44,7 +44,7 @@ const FeatureSection = ({ show }: { show: boolean }) => {
     const newStyles = api.scrollSnapList().map((scrollSnap) => {
       let diff = scrollSnap - scrollProgress;
 
-      if (api.options.loop ?? true) {
+      if (api.options?.loop ?? true) {
         if (diff > 0.5) diff -= 1;
         if (diff < -0.5) diff += 1;
       }
