@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import React from "react";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardDescription, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -15,37 +14,22 @@ const features = [
   {
     title: "Tether",
     description: "Bond with people",
-    href: "#",
-    imageSrc: "https://placehold.co/400x300.png",
-    dataAiHint: "connection network",
+    href: "https://tether.app",
   },
   {
     title: "Tranzoid",
     description: "Code Translator",
     href: "#",
-    imageSrc: "https://placehold.co/400x300.png",
-    dataAiHint: "code translation",
   },
   {
     title: "Drillzy",
     description: "Microskill Daily",
     href: "#",
-    imageSrc: "https://placehold.co/400x300.png",
-    dataAiHint: "learning progress",
   },
   {
     title: "Ashground",
     description: "Digital Burner",
     href: "#",
-    imageSrc: "https://placehold.co/400x300.png",
-    dataAiHint: "digital campfire",
-  },
-  {
-    title: "Project Nova",
-    description: "Next-gen dashboard",
-    href: "#",
-    imageSrc: "https://placehold.co/400x300.png",
-    dataAiHint: "modern dashboard",
   },
 ];
 
@@ -60,7 +44,7 @@ const FeatureSection = ({ show }: { show: boolean }) => {
     const newStyles = api.scrollSnapList().map((scrollSnap) => {
       let diff = scrollSnap - scrollProgress;
 
-      if (api.options?.loop ?? true) {
+      if (api.options.loop ?? true) {
         if (diff > 0.5) diff -= 1;
         if (diff < -0.5) diff += 1;
       }
@@ -98,7 +82,7 @@ const FeatureSection = ({ show }: { show: boolean }) => {
     >
       <div
         className={cn(
-          "w-full max-w-4xl opacity-0 transform-gpu",
+          "w-full max-w-lg opacity-0 transform-gpu",
           show && "animate-fade-in-up"
         )}
         style={{ animationDelay: '200ms' }}
@@ -111,29 +95,22 @@ const FeatureSection = ({ show }: { show: boolean }) => {
           }}
           className="w-full"
         >
-          <CarouselContent className="-ml-4">
+          <CarouselContent className="-ml-4 py-4">
             {features.map((feature, index) => (
               <CarouselItem 
                 key={index} 
-                className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 transition-transform duration-200 ease-out"
+                className="pl-4 basis-full md:basis-1/2 lg:basis-2/3 transition-transform duration-200 ease-out"
                 style={styles[index]}
               >
-                <a href={feature.href} className="block h-full group">
-                  <Card className="h-full bg-card/60 backdrop-blur-sm border-white/10 transition-all duration-300 group-hover:border-accent group-hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] overflow-hidden rounded-lg">
-                    <CardContent className="p-0 aspect-[4/3] relative">
-                      <Image
-                        src={feature.imageSrc}
-                        alt={feature.title}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        data-ai-hint={feature.dataAiHint}
-                      />
-                    </CardContent>
-                    <CardHeader className="p-4">
-                      <CardTitle className="text-xl font-bold text-primary-foreground">
+                <a href={feature.href} target="_blank" rel="noopener noreferrer" className="block h-full group">
+                  <Card className="h-full bg-card/60 backdrop-blur-sm border-white/10 transition-all duration-300 group-hover:border-accent group-hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] overflow-hidden rounded-lg flex flex-col">
+                    <CardContent className="flex-grow flex items-center justify-center p-6 aspect-[4/3]">
+                       <h3 className="text-4xl font-bold text-primary-foreground text-center">
                         {feature.title}
-                      </CardTitle>
-                      <CardDescription className="text-muted-foreground pt-1">
+                      </h3>
+                    </CardContent>
+                    <CardHeader className="p-4 pt-2 text-center">
+                      <CardDescription className="text-muted-foreground">
                         {feature.description}
                       </CardDescription>
                     </CardHeader>
