@@ -59,21 +59,21 @@ const FeatureSection = ({ show }: { show: boolean }) => {
     >
       <div
         className={cn(
-          "w-full max-w-7xl opacity-0 transform-gpu",
+          "w-full max-w-2xl opacity-0 transform-gpu",
           show && "animate-fade-in-up"
         )}
         style={{ animationDelay: '200ms' }}
       >
         <Carousel
           opts={{
-            align: "start",
+            align: "center",
             loop: true,
           }}
           className="w-full"
         >
           <CarouselContent className="-ml-4">
             {features.map((feature, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
+              <CarouselItem key={index} className="pl-4">
                 <a href={feature.href} className="block h-full group">
                   <Card className="h-full bg-card/60 backdrop-blur-sm border-white/10 transition-all duration-300 group-hover:border-accent group-hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] overflow-hidden rounded-lg">
                     <CardContent className="p-0 aspect-[4/3] relative">
@@ -98,8 +98,8 @@ const FeatureSection = ({ show }: { show: boolean }) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex ml-14"/>
-          <CarouselNext className="hidden md:flex mr-14"/>
+          <CarouselPrevious className="hidden md:flex"/>
+          <CarouselNext className="hidden md:flex"/>
         </Carousel>
       </div>
     </section>
