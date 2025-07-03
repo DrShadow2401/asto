@@ -68,7 +68,7 @@ const FeatureSection = ({ show }: { show: boolean }) => {
     >
       <div
         className={cn(
-          "w-full max-w-6xl opacity-0 transform-gpu",
+          "w-full max-w-4xl opacity-0 transform-gpu",
           show && "animate-fade-in-up"
         )}
         style={{ animationDelay: '200ms' }}
@@ -86,7 +86,7 @@ const FeatureSection = ({ show }: { show: boolean }) => {
               <CarouselItem 
                 key={index} 
                 className={cn(
-                  "pl-4 basis-full md:basis-1/3 transition-all duration-300 ease-in-out",
+                  "pl-4 basis-full md:basis-1/2 lg:basis-1/3 transition-all duration-300 ease-in-out",
                   index === current 
                     ? "scale-100 opacity-100" 
                     : "scale-85 opacity-50"
