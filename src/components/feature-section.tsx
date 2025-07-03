@@ -21,19 +21,19 @@ const features = [
   {
     title: "Drillzy",
     description: "Build one new skill at a time with daily, personalized micro-skill challenges.",
-    href: "#",
+    href: "https://drillzy.app",
     icon: Target,
   },
   {
     title: "Tranzoid",
     description: "Translate entire codebases between languages with AI—fast, accurate, and developer-ready.",
-    href: "#",
+    href: "https://tranzoid.com",
     icon: Repeat,
   },
   {
     title: "Ashground",
     description: "Write it, burn it—your private digital space to vent, reflect, and release.",
-    href: "#",
+    href: "https://ashground.com",
     icon: Flame,
   },
 ];
@@ -109,21 +109,27 @@ const FeatureSection = ({ show }: { show: boolean }) => {
                 className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 transition-transform duration-200 ease-out"
                 style={styles[index]}
               >
-                <a href={feature.href} target="_blank" rel="noopener noreferrer" className="block h-full group">
-                  <Card className="h-full bg-card/60 backdrop-blur-sm border-white/10 transition-all duration-300 group-hover:border-accent group-hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] overflow-hidden rounded-lg flex flex-col">
-                    <CardContent className="flex-grow flex flex-col items-center justify-center p-6 aspect-[4/3]">
-                      <div className="flex items-center justify-center gap-4 mb-4">
-                        {feature.icon && <feature.icon className="w-10 h-10 text-primary shrink-0" />}
-                        <h3 className="text-4xl font-bold text-primary-foreground text-center">
-                          {feature.title}
-                        </h3>
-                      </div>
-                      <CardDescription className="text-foreground/80 text-center">
-                        {feature.description}
-                      </CardDescription>
-                    </CardContent>
-                  </Card>
-                </a>
+                <Card className="h-full bg-card/60 backdrop-blur-sm border-white/10 transition-all duration-300 hover:border-accent hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] overflow-hidden rounded-lg flex flex-col">
+                  <CardContent className="flex-grow flex flex-col items-center justify-center p-6 aspect-[4/3]">
+                    <div className="flex items-center justify-center gap-4 mb-4">
+                      {feature.icon && <feature.icon className="w-10 h-10 text-primary shrink-0" />}
+                      <h3 className="text-4xl font-bold text-primary-foreground text-center">
+                        {feature.title}
+                      </h3>
+                    </div>
+                    <CardDescription className="text-foreground text-center mb-4">
+                      {feature.description}
+                    </CardDescription>
+                    <a
+                      href={feature.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-auto text-accent underline underline-offset-4 font-semibold transition-colors hover:text-primary"
+                    >
+                      View Project
+                    </a>
+                  </CardContent>
+                </Card>
               </CarouselItem>
             ))}
           </CarouselContent>
