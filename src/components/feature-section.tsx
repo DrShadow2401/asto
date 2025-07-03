@@ -9,27 +9,32 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
+import { Link, Repeat, Target, Flame } from "lucide-react";
 
 const features = [
   {
     title: "Tether",
     description: "Bond with people",
     href: "https://tether.app",
+    icon: Link,
   },
   {
     title: "Tranzoid",
     description: "Code Translator",
     href: "#",
+    icon: Repeat,
   },
   {
     title: "Drillzy",
     description: "Microskill Daily",
     href: "#",
+    icon: Target,
   },
   {
     title: "Ashground",
     description: "Digital Burner",
     href: "#",
+    icon: Flame,
   },
 ];
 
@@ -101,16 +106,19 @@ const FeatureSection = ({ show }: { show: boolean }) => {
             {features.map((feature, index) => (
               <CarouselItem 
                 key={index} 
-                className="pl-4 basis-full md:basis-1/2 lg:basis-1/2 transition-transform duration-200 ease-out"
+                className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 transition-transform duration-200 ease-out"
                 style={styles[index]}
               >
                 <a href={feature.href} target="_blank" rel="noopener noreferrer" className="block h-full group">
                   <Card className="h-full bg-card/60 backdrop-blur-sm border-white/10 transition-all duration-300 group-hover:border-accent group-hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] overflow-hidden rounded-lg flex flex-col">
                     <CardContent className="flex-grow flex flex-col items-center justify-center p-6 aspect-[4/3]">
-                       <h3 className="text-4xl font-bold text-primary-foreground text-center">
-                        {feature.title}
-                      </h3>
-                      <CardDescription className="text-muted-foreground mt-2 text-center">
+                      <div className="flex items-center justify-center gap-4 mb-4">
+                        {feature.icon && <feature.icon className="w-10 h-10 text-primary shrink-0" />}
+                        <h3 className="text-4xl font-bold text-primary-foreground text-center">
+                          {feature.title}
+                        </h3>
+                      </div>
+                      <CardDescription className="text-muted-foreground text-center">
                         {feature.description}
                       </CardDescription>
                     </CardContent>
