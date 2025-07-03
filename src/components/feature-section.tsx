@@ -110,14 +110,14 @@ const FeatureSection = ({ show }: { show: boolean }) => {
                 style={styles[index]}
               >
                 <Card className="h-full bg-card/60 backdrop-blur-sm border-white/10 transition-all duration-300 hover:border-accent hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] overflow-hidden rounded-lg flex flex-col">
-                  <CardContent className="flex-grow flex flex-col items-center justify-center p-6 aspect-[4/3]">
+                  <CardContent className="flex-grow flex flex-col items-center justify-center p-4 md:p-6 aspect-[4/3]">
                     <div className="flex items-center justify-center gap-4 mb-4">
-                      {feature.icon && <feature.icon className="w-10 h-10 text-primary shrink-0" />}
-                      <h3 className="text-4xl font-bold text-primary-foreground text-center">
+                      {feature.icon && <feature.icon className="w-8 h-8 md:w-10 md:h-10 text-primary shrink-0" />}
+                      <h3 className="text-3xl md:text-4xl font-bold text-primary-foreground text-center">
                         {feature.title}
                       </h3>
                     </div>
-                    <CardDescription className="text-foreground text-center mb-4">
+                    <CardDescription className="text-foreground/90 text-center mb-4 text-sm md:text-base">
                       {feature.description}
                     </CardDescription>
                     <a

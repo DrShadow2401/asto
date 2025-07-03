@@ -31,13 +31,13 @@ const ConnectSection = ({ show }: { show: boolean }) => {
         )}
         style={{ animationDelay: '600ms' }}
       >
-        <Card className="bg-black/50 backdrop-blur-sm border-white/10 p-8 md:p-12 rounded-lg">
+        <Card className="bg-black/50 backdrop-blur-sm border-white/10 p-6 md:p-12 rounded-lg">
           <CardHeader className="p-0 mb-6">
-            <CardTitle className="text-3xl md:text-4xl font-bold text-primary-foreground">
+            <CardTitle className="text-2xl md:text-3xl font-bold text-primary-foreground">
               About Me
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-0 text-lg text-foreground/80 space-y-4">
+          <CardContent className="p-0 text-base md:text-lg text-foreground/80 space-y-4">
             <p>
               Hey, I’m Suhani — a high school student by age, but a startup founder by spirit (and caffeine levels).
             </p>
@@ -56,7 +56,7 @@ const ConnectSection = ({ show }: { show: boolean }) => {
 
       <div
         className={cn(
-          "flex gap-8 opacity-0",
+          "flex gap-6 opacity-0",
           show && "animate-fade-in-up"
         )}
         style={{ animationDelay: '800ms' }}

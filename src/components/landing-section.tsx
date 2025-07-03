@@ -36,7 +36,7 @@ const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
            <h1
             key={currentLanguageIndex}
             className={cn(
-              "text-6xl md:text-7xl font-bold text-white",
+              "text-5xl md:text-7xl font-bold text-white",
               animationClass
             )}
           >
