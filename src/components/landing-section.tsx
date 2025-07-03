@@ -5,7 +5,7 @@ import Starfield from "./starfield";
 import { cn } from "@/lib/utils";
 
 const languages = ["Hello", "Bonjour", "Hola", "Ciao", "Olá", "Guten Tag", "Namaste"];
-const LANGUAGE_DISPLAY_DURATION = 1000;
+const LANGUAGE_DISPLAY_DURATION = 150;
 
 const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
   const [currentLanguageIndex, setCurrentLanguageIndex] = useState(0);
@@ -18,7 +18,7 @@ const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
       setTimeout(() => {
         setShowName(true);
         onComplete();
-      }, 1000);
+      }, 500);
       return;
     }
 
@@ -27,7 +27,7 @@ const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
       setTimeout(() => {
         setCurrentLanguageIndex((prev) => prev + 1);
         setAnimationClass("animate-fade-in");
-      }, 500); 
+      }, 200); 
     }, LANGUAGE_DISPLAY_DURATION);
 
     return () => clearTimeout(timer);
