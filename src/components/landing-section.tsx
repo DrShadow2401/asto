@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Starfield from "./starfield";
 import { cn } from "@/lib/utils";
 
-const languages = ["Hello", "Bonjour", "Hola", "Ciao", "Olá", "Guten Tag", "Namaste"];
-const LANGUAGE_DISPLAY_DURATION = 150;
+const languages = ["Hello", "Bonjour", "Hola", "Ciao", "Olá", "Guten Tag", "Konnichiwa", "Annyeong", "Shalom", "Namaste"];
+const LANGUAGE_DISPLAY_DURATION = 100;
+const FADE_OUT_DURATION = 150;
 
 const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
   const [currentLanguageIndex, setCurrentLanguageIndex] = useState(0);
@@ -22,16 +22,15 @@ const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
       setTimeout(() => {
         setCurrentLanguageIndex((prev) => prev + 1);
         setAnimationClass("animate-fade-in");
-      }, 200); 
+      }, FADE_OUT_DURATION); 
     }, LANGUAGE_DISPLAY_DURATION);
 
     return () => clearTimeout(timer);
   }, [currentLanguageIndex, onComplete]);
 
   return (
-    <section className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden">
-      <Starfield count={150} />
-      <div className="relative z-10 flex h-40 flex-col items-center justify-center text-center">
+    <section className="flex h-screen w-full flex-col items-center justify-center">
+      <div className="flex h-40 flex-col items-center justify-center text-center">
         {currentLanguageIndex < languages.length && (
            <h1
             key={currentLanguageIndex}

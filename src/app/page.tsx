@@ -11,7 +11,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center bg-background text-foreground overflow-x-hidden">
+    <main className="flex flex-col items-center justify-center bg-black text-foreground overflow-x-hidden">
       <LandingSection onComplete={handleLandingComplete} />
     </main>
   );
