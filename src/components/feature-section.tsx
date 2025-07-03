@@ -7,8 +7,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
@@ -100,7 +98,7 @@ const FeatureSection = ({ show }: { show: boolean }) => {
     >
       <div
         className={cn(
-          "w-full max-w-2xl opacity-0 transform-gpu",
+          "w-full max-w-4xl opacity-0 transform-gpu",
           show && "animate-fade-in-up"
         )}
         style={{ animationDelay: '200ms' }}
@@ -117,7 +115,7 @@ const FeatureSection = ({ show }: { show: boolean }) => {
             {features.map((feature, index) => (
               <CarouselItem 
                 key={index} 
-                className="pl-4 basis-full md:basis-1/2 transition-transform duration-200 ease-out"
+                className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 transition-transform duration-200 ease-out"
                 style={styles[index]}
               >
                 <a href={feature.href} className="block h-full group">
@@ -144,8 +142,6 @@ const FeatureSection = ({ show }: { show: boolean }) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex"/>
-          <CarouselNext className="hidden md:flex"/>
         </Carousel>
       </div>
     </section>
