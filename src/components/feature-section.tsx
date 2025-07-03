@@ -77,7 +77,7 @@ const FeatureSection = ({ show }: { show: boolean }) => {
           setApi={setApi}
           opts={{
             align: "center",
-            loop: true,
+            loop: false,
           }}
           className="w-full"
         >
