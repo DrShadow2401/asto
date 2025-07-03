@@ -14,25 +14,25 @@ import { Link, Repeat, Target, Flame } from "lucide-react";
 const features = [
   {
     title: "Tether",
-    description: "Bond with people",
+    description: "A connection tracker that logs your bonds and gives AI-powered nudges to keep relationships thriving.",
     href: "https://tether.app",
     icon: Link,
   },
-  {
-    title: "Tranzoid",
-    description: "Code Translator",
-    href: "#",
-    icon: Repeat,
-  },
-  {
+    {
     title: "Drillzy",
-    description: "Microskill Daily",
+    description: "Build one new skill at a time with daily, personalized micro-skill challenges.",
     href: "#",
     icon: Target,
   },
   {
+    title: "Tranzoid",
+    description: "Translate entire codebases between languages with AI—fast, accurate, and developer-ready.",
+    href: "#",
+    icon: Repeat,
+  },
+  {
     title: "Ashground",
-    description: "Digital Burner",
+    description: "Write it, burn it—your private digital space to vent, reflect, and release.",
     href: "#",
     icon: Flame,
   },
