@@ -1,11 +1,13 @@
 "use client";
 
+import Starfield from "@/components/starfield";
 import FeatureSection from "@/components/feature-section";
 import ConnectSection from "@/components/connect-section";
 
 export default function HomePage() {
   return (
     <main className="relative flex flex-col items-center justify-center bg-background text-foreground overflow-x-hidden">
+      <Starfield />
       <div className="relative z-10 w-full">
         <section className="flex flex-col items-center justify-center text-center py-24 md:py-32 px-4 animate-fade-in">
           <h1 className="text-6xl md:text-8xl font-bold text-foreground font-headline drop-shadow-[0_0_15px_hsl(var(--foreground)/0.3)]">
