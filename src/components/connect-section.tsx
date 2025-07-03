@@ -74,7 +74,9 @@ const ConnectSection = ({ show }: { show: boolean }) => {
           />
         </a>
         <a
-          href="mailto:suhaniastoeterna@gmail.com"
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=suhaniastoeterna@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label="Email"
           className="text-primary-foreground transition-all duration-300 hover:text-accent"
         >
