@@ -86,7 +86,7 @@ const FeatureSection = ({ show }: { show: boolean }) => {
               <CarouselItem 
                 key={index} 
                 className={cn(
-                  "pl-8 basis-4/5 md:basis-2/3 lg:basis-1/2 transition-all duration-300 ease-in-out",
+                  "pl-8 basis-4/5 md:basis-1/2 lg:basis-1/3 transition-all duration-300 ease-in-out",
                   index === current 
                     ? "scale-100 opacity-100" 
                     : "scale-90 opacity-60"
