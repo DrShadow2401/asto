@@ -1,6 +1,14 @@
 "use client";
 
-import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import Image from "next/image";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 
 const features = [
@@ -8,29 +16,36 @@ const features = [
     title: "Tether",
     description: "Bond with people",
     href: "#",
-    glowClass: "hover:shadow-[0_0_25px_hsl(var(--primary)/0.7)]",
-    borderClass: "hover:border-primary",
+    imageSrc: "https://placehold.co/600x450.png",
+    dataAiHint: "connection network",
   },
   {
     title: "Tranzoid",
     description: "Code Translator",
     href: "#",
-    glowClass: "hover:shadow-[0_0_25px_hsl(var(--accent)/0.7)]",
-    borderClass: "hover:border-accent",
+    imageSrc: "https://placehold.co/600x450.png",
+    dataAiHint: "code translation",
   },
   {
     title: "Drillzy",
     description: "Microskill Daily",
     href: "#",
-    glowClass: "hover:shadow-[0_0_25px_hsl(var(--primary)/0.7)]",
-    borderClass: "hover:border-primary",
+    imageSrc: "https://placehold.co/600x450.png",
+    dataAiHint: "learning progress",
   },
   {
     title: "Ashground",
     description: "Digital Burner",
     href: "#",
-    glowClass: "hover:shadow-[0_0_25px_hsl(var(--accent)/0.7)]",
-    borderClass: "hover:border-accent",
+    imageSrc: "https://placehold.co/600x450.png",
+    dataAiHint: "digital campfire",
+  },
+  {
+    title: "Project Nova",
+    description: "Next-gen dashboard",
+    href: "#",
+    imageSrc: "https://placehold.co/600x450.png",
+    dataAiHint: "modern dashboard",
   },
 ];
 
@@ -38,37 +53,54 @@ const FeatureSection = ({ show }: { show: boolean }) => {
   return (
     <section
       className={cn(
-        "w-full min-h-[60vh] py-24 px-4 md:px-8 flex flex-col items-center justify-center transition-opacity duration-1000",
+        "w-full py-24 px-4 md:px-8 flex flex-col items-center justify-center transition-opacity duration-1000",
         show ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl">
-        {features.map((feature, index) => (
-          <a
-            key={feature.title}
-            href={feature.href}
-            className={cn(
-              "block opacity-0 transform-gpu",
-              show && "animate-fade-in-up"
-            )}
-            style={{ animationDelay: `${index * 200}ms` }}
-          >
-            <Card className={cn(
-                "h-full bg-card/50 backdrop-blur-sm border-border transition-all duration-300",
-                feature.glowClass,
-                feature.borderClass
-            )}>
-              <CardHeader>
-                <CardTitle className="text-2xl font-bold text-primary-foreground">
-                  {feature.title}
-                </CardTitle>
-                <CardDescription className="text-muted-foreground pt-2">
-                  {feature.description}
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </a>
-        ))}
+      <div
+        className={cn(
+          "w-full max-w-7xl opacity-0 transform-gpu",
+          show && "animate-fade-in-up"
+        )}
+        style={{ animationDelay: '200ms' }}
+      >
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-4">
+            {features.map((feature, index) => (
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
+                <a href={feature.href} className="block h-full group">
+                  <Card className="h-full bg-card/60 backdrop-blur-sm border-white/10 transition-all duration-300 group-hover:border-accent group-hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] overflow-hidden rounded-lg">
+                    <CardContent className="p-0 aspect-[4/3] relative">
+                      <Image
+                        src={feature.imageSrc}
+                        alt={feature.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        data-ai-hint={feature.dataAiHint}
+                      />
+                    </CardContent>
+                    <CardHeader className="p-4">
+                      <CardTitle className="text-xl font-bold text-primary-foreground">
+                        {feature.title}
+                      </CardTitle>
+                      <CardDescription className="text-muted-foreground pt-1">
+                        {feature.description}
+                      </CardDescription>
+                    </CardHeader>
+                  </Card>
+                </a>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:flex ml-14"/>
+          <CarouselNext className="hidden md:flex mr-14"/>
+        </Carousel>
       </div>
     </section>
   );
