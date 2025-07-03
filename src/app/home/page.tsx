@@ -2,7 +2,6 @@
 
 import FeatureSection from "@/components/feature-section";
 import ConnectSection from "@/components/connect-section";
-import AboutSection from "@/components/about-section";
 
 export default function HomePage() {
   return (
@@ -18,7 +17,6 @@ export default function HomePage() {
       
       <FeatureSection show={true} />
       <ConnectSection show={true} />
-      <AboutSection show={true} />
     </main>
   );
 }
