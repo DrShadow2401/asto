@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Card, CardHeader, CardDescription, CardContent } from "@/components/ui/card";
+import { Card, CardDescription, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -44,7 +44,7 @@ const FeatureSection = ({ show }: { show: boolean }) => {
     const newStyles = api.scrollSnapList().map((scrollSnap) => {
       let diff = scrollSnap - scrollProgress;
 
-      if (api.options?.loop ?? true) {
+      if (api.options().loop) {
         if (diff > 0.5) diff -= 1;
         if (diff < -0.5) diff += 1;
       }
@@ -68,8 +68,8 @@ const FeatureSection = ({ show }: { show: boolean }) => {
     api.on("scroll", onScroll);
     api.on("reInit", onScroll);
     return () => {
-      api.off("scroll", onScroll);
-      api.off("reInit", onScroll);
+      api?.off("scroll", onScroll);
+      api?.off("reInit", onScroll);
     };
   }, [api, onScroll]);
 
@@ -82,7 +82,7 @@ const FeatureSection = ({ show }: { show: boolean }) => {
     >
       <div
         className={cn(
-          "w-full max-w-lg opacity-0 transform-gpu",
+          "w-full max-w-2xl opacity-0 transform-gpu",
           show && "animate-fade-in-up"
         )}
         style={{ animationDelay: '200ms' }}
@@ -99,21 +99,19 @@ const FeatureSection = ({ show }: { show: boolean }) => {
             {features.map((feature, index) => (
               <CarouselItem 
                 key={index} 
-                className="pl-4 basis-full md:basis-1/2 lg:basis-2/3 transition-transform duration-200 ease-out"
+                className="pl-4 basis-full md:basis-2/3 lg:basis-2/3 transition-transform duration-200 ease-out"
                 style={styles[index]}
               >
                 <a href={feature.href} target="_blank" rel="noopener noreferrer" className="block h-full group">
                   <Card className="h-full bg-card/60 backdrop-blur-sm border-white/10 transition-all duration-300 group-hover:border-accent group-hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] overflow-hidden rounded-lg flex flex-col">
-                    <CardContent className="flex-grow flex items-center justify-center p-6 aspect-[4/3]">
+                    <CardContent className="flex-grow flex flex-col items-center justify-center p-6 aspect-[4/3]">
                        <h3 className="text-4xl font-bold text-primary-foreground text-center">
                         {feature.title}
                       </h3>
-                    </CardContent>
-                    <CardHeader className="p-4 pt-2 text-center">
-                      <CardDescription className="text-muted-foreground">
+                      <CardDescription className="text-muted-foreground mt-2 text-center">
                         {feature.description}
                       </CardDescription>
-                    </CardHeader>
+                    </CardContent>
                   </Card>
                 </a>
               </CarouselItem>
