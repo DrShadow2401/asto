@@ -18,7 +18,7 @@ const features = [
     href: "https://tether.app",
     icon: Link,
   },
-    {
+  {
     title: "Drillzy",
     description: "Build one new skill at a time with daily, personalized micro-skill challenges.",
     href: "#",
@@ -118,7 +118,7 @@ const FeatureSection = ({ show }: { show: boolean }) => {
                           {feature.title}
                         </h3>
                       </div>
-                      <CardDescription className="text-muted-foreground text-center">
+                      <CardDescription className="text-foreground/80 text-center">
                         {feature.description}
                       </CardDescription>
                     </CardContent>
