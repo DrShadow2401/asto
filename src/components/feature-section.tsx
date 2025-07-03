@@ -6,6 +6,7 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 import { Link, Repeat, Target, Flame } from "lucide-react";
@@ -37,12 +38,27 @@ const features = [
   },
 ];
 
-const carouselOptions = {
-  align: "center" as const,
-  loop: true,
-};
-
 const FeatureSection = ({ show }: { show: boolean }) => {
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    const onSelect = () => {
+      setCurrent(api.selectedScrollSnap());
+    };
+    
+    onSelect();
+    api.on("select", onSelect);
+
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
+
   return (
     <section
       className={cn(
@@ -58,14 +74,23 @@ const FeatureSection = ({ show }: { show: boolean }) => {
         style={{ animationDelay: '200ms' }}
       >
         <Carousel
-          opts={carouselOptions}
+          setApi={setApi}
+          opts={{
+            align: "center",
+            loop: true,
+          }}
           className="w-full"
         >
           <CarouselContent className="-ml-4 py-4">
             {features.map((feature, index) => (
               <CarouselItem 
                 key={index} 
-                className="pl-4 basis-full md:basis-1/2 lg:basis-1/3"
+                className={cn(
+                  "pl-4 basis-full md:basis-1/2 lg:basis-1/3 transition-all duration-300 ease-in-out",
+                  index === current 
+                    ? "scale-100 opacity-100" 
+                    : "scale-90 opacity-60"
+                )}
               >
                 <Card className="h-full bg-card/60 backdrop-blur-sm border-white/10 transition-all duration-300 hover:border-accent hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] overflow-hidden rounded-lg flex flex-col">
                   <CardContent className="flex-grow flex flex-col items-center justify-center p-4 md:p-6 aspect-[4/3]">
