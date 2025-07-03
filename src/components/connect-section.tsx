@@ -21,7 +21,6 @@ const ConnectSection = ({ show }: { show: boolean }) => {
         <h2 className="text-4xl md:text-5xl font-bold text-primary-foreground">
           Let's Connect
         </h2>
-        <p className="mt-4 text-xl text-muted-foreground animate-fade-in-up" style={{ animationDelay: '1000ms' }}>Hi, I’m Suhani.</p>
       </div>
 
       <div
