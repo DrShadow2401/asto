@@ -9,7 +9,7 @@ export default function HomeLayout({
 }) {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
-      <Starfield count={10000} />
+      <Starfield count={1000} />
       <div className="relative z-10">{children}</div>
     </div>
   );

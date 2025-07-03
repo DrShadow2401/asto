@@ -13,7 +13,7 @@ interface Star {
   color: string;
 }
 
-const Starfield = ({ count = 150 }: { count?: number }) => {
+const Starfield = ({ count = 500 }: { count?: number }) => {
   const [stars, setStars] = useState<Star[]>([]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Starfield = ({ count = 150 }: { count?: number }) => {
           y: Math.random() * height,
           size: Math.random() * 2 + 0.5,
           delay: Math.random() * 5,
-          duration: Math.random() * 10 + 5,
+          duration: Math.random() * 15 + 10,
           color: colors[Math.floor(Math.random() * colors.length)],
         });
       }
