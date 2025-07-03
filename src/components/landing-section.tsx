@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
-const languages = ["Hello", "Bonjour", "Hola", "Ciao", "Olá", "Guten Tag", "Konnichiwa", "Annyeong", "Shalom", "Namaste"];
-const LANGUAGE_DISPLAY_DURATION = 100;
+const languages = ["Hello", "Bonjour", "Hola", "Ciao", "Olá", "Guten Tag", "Konnichiwa", "Annyeong", "Shalom", "Namaste", "你好", "Здравствуйте", "Marhaba", "Jambo"];
+const LANGUAGE_DISPLAY_DURATION = 200;
 const FADE_OUT_DURATION = 150;
 
 const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
@@ -13,8 +13,9 @@ const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
 
   useEffect(() => {
     if (currentLanguageIndex >= languages.length) {
-      onComplete();
-      return;
+      // Short delay before transitioning to give the last word some screen time
+      const finalTimer = setTimeout(onComplete, 100); 
+      return () => clearTimeout(finalTimer);
     }
 
     const timer = setTimeout(() => {
