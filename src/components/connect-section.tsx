@@ -1,6 +1,6 @@
 "use client";
 
-import { Linkedin, Mail } from "lucide-react";
+import { Linkedin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -56,7 +56,7 @@ const ConnectSection = ({ show }: { show: boolean }) => {
 
       <div
         className={cn(
-          "flex gap-6 opacity-0",
+          "flex flex-col items-center gap-6 opacity-0",
           show && "animate-fade-in-up"
         )}
         style={{ animationDelay: '800ms' }}
@@ -73,18 +73,9 @@ const ConnectSection = ({ show }: { show: boolean }) => {
             className="transition-transform duration-300 hover:-translate-y-1 hover:drop-shadow-[0_0_8px_hsl(var(--accent))]"
           />
         </a>
-        <a
-          href="https://mail.google.com/mail/?view=cm&fs=1&to=suhaniastoeterna@gmail.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Email"
-          className="text-primary-foreground transition-all duration-300 hover:text-accent"
-        >
-          <Mail
-            size={40}
-            className="transition-transform duration-300 hover:-translate-y-1 hover:drop-shadow-[0_0_8px_hsl(var(--accent))]"
-          />
-        </a>
+        <p className="text-foreground/80 text-lg">
+          suhaniastoeterna@gmail.com
+        </p>
       </div>
     </section>
   );
