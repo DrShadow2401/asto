@@ -9,7 +9,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
-import { Link, Repeat, Target, Flame } from "lucide-react";
+import { Link, Repeat, Target, Flame, BrainCircuit, Library, FlaskConical } from "lucide-react";
 
 const features = [
   {
@@ -35,6 +35,24 @@ const features = [
     description: "Write it, burn it—your private digital space to vent, reflect, and release.",
     href: "https://ashground.com",
     icon: Flame,
+  },
+  {
+    title: "Norskmind",
+    description: "A comprehensive encyclopedia of Norwegian philosophy – from Medieval scholasticism to Renaissance humanism, from Enlightenment thought to modern political theory.",
+    href: "https://norskmind.com",
+    icon: BrainCircuit,
+  },
+  {
+    title: "Italymind",
+    description: "A comprehensive encyclopedia of Italian philosophy — from Medieval scholasticism to Renaissance humanism, from Enlightenment thought to modern political theory.",
+    href: "https://italymind.com",
+    icon: Library,
+  },
+  {
+    title: "Atomican",
+    description: "A virtual chemistry lab.",
+    href: "https://atomican.com",
+    icon: FlaskConical,
   },
 ];
 
