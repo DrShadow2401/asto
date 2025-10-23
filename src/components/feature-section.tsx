@@ -38,19 +38,19 @@ const features = [
   },
   {
     title: "Norskmind",
-    description: "A comprehensive encyclopedia of Norwegian philosophy – from Medieval scholasticism to Renaissance humanism, from Enlightenment thought to modern political theory.",
+    description: "Journey through Norwegian intellectual history, from medieval scholasticism to modern philosophy.",
     href: "https://norskmind.com",
     icon: BrainCircuit,
   },
   {
     title: "Italymind",
-    description: "A comprehensive encyclopedia of Italian philosophy — from Medieval scholasticism to Renaissance humanism, from Enlightenment thought to modern political theory.",
+    description: "Discover the rich history of Italian philosophy, from ancient Rome and the Renaissance to contemporary thought.",
     href: "https://italymind.com",
     icon: Library,
   },
   {
     title: "Atomican",
-    description: "A virtual chemistry lab.",
+    description: "A virtual chemistry lab to run experiments, explore reactions, and learn without limits.",
     href: "https://atomican.com",
     icon: FlaskConical,
   },
