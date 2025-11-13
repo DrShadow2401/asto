@@ -15,13 +15,13 @@ const features = [
   {
     title: "Tether",
     description: "A connection tracker that logs your bonds and gives AI-powered nudges to keep relationships thriving.",
-    href: "https://tether.app",
+    href: "https://tether4646464.vercel.app/",
     icon: Link,
   },
   {
     title: "Drillzy",
     description: "Build one new skill at a time with daily, personalized micro-skill challenges.",
-    href: "https://drillzy.app",
+    href: "https://drillzy-etpo.vercel.app/",
     icon: Target,
   },
   {
