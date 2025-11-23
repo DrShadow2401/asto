@@ -9,7 +9,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
-import { Link, Repeat, Target, Flame, BrainCircuit, Library, FlaskConical } from "lucide-react";
+import { Link, Repeat, Target, Flame, BrainCircuit, Library, FlaskConical, LifeBuoy } from "lucide-react";
 
 const features = [
   {
@@ -17,6 +17,12 @@ const features = [
     description: "A virtual chemistry lab to run experiments, explore reactions, and learn without limits.",
     href: "https://atomican.com",
     icon: FlaskConical,
+  },
+  {
+    title: "SafeSpace",
+    description: "A judgment-free app to express heavy feelings, find grounding, and regain clarity with gentle support.",
+    href: "https://teen-suicide-prevention.vercel.app",
+    icon: LifeBuoy,
   },
   {
     title: "Tether",
