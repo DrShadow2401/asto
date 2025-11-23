@@ -13,6 +13,12 @@ import { Link, Repeat, Target, Flame, BrainCircuit, Library, FlaskConical } from
 
 const features = [
   {
+    title: "Atomican",
+    description: "A virtual chemistry lab to run experiments, explore reactions, and learn without limits.",
+    href: "https://atomican.com",
+    icon: FlaskConical,
+  },
+  {
     title: "Tether",
     description: "A connection tracker that logs your bonds and gives AI-powered nudges to keep relationships thriving.",
     href: "https://tether4646464.vercel.app/",
@@ -47,12 +53,6 @@ const features = [
     description: "Discover the rich history of Italian philosophy, from ancient Rome and the Renaissance to contemporary thought.",
     href: "https://italymind.com",
     icon: Library,
-  },
-  {
-    title: "Atomican",
-    description: "A virtual chemistry lab to run experiments, explore reactions, and learn without limits.",
-    href: "https://atomican.com",
-    icon: FlaskConical,
   },
 ];
 
