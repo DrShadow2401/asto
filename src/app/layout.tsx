@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'Asto Eterna',
-  description: 'Landing page for Asto Eterna',
+  title: 'Questonin',
+  description: 'Landing page for Questonin',
 };
 
 export default function RootLayout({
