@@ -21,7 +21,7 @@ const features = [
   {
     title: "Fionum",
     description: "A judgment-free app to express heavy feelings, find grounding, and regain clarity with gentle support.",
-    href: "https://teen-suicide-prevention.vercel.app",
+    href: "https://fionum.com",
     icon: LifeBuoy,
   },
   {
