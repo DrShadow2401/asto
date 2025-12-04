@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 const languages = ["Hello", "Bonjour", "Hola", "Ciao", "Konnichiwa", "Namaste", "你好"];
-const LANGUAGE_DISPLAY_DURATION = 500;
+const LANGUAGE_DISPLAY_DURATION = 1200;
 const FADE_OUT_DURATION = 150;
 
 const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
