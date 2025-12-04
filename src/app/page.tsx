@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import LandingSection from "@/components/landing-section";
-import Starfield from "@/components/starfield";
+import { SpiralAnimation } from "@/components/ui/spiral-animation";
 
 export default function Home() {
   const router = useRouter();
@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center justify-center bg-background text-foreground overflow-x-hidden min-h-screen">
-      <Starfield count={1000} />
+      <SpiralAnimation />
       <div className="relative z-10">
         <LandingSection onComplete={handleLandingComplete} />
       </div>
