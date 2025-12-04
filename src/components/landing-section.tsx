@@ -12,21 +12,28 @@ const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
   const [animationClass, setAnimationClass] = useState("animate-fade-in");
 
   useEffect(() => {
-    if (currentLanguageIndex >= languages.length) {
-      // After the last language, complete the transition immediately.
-      const finalTimer = setTimeout(onComplete, FADE_OUT_DURATION);
+    // When we're on the last language, we want to call onComplete and stop.
+    if (currentLanguageIndex === languages.length -1) {
+       const finalTimer = setTimeout(() => {
+        setAnimationClass("animate-fade-out");
+        // Call onComplete as the last word fades out
+        setTimeout(onComplete, FADE_OUT_DURATION);
+      }, LANGUAGE_DISPLAY_DURATION);
       return () => clearTimeout(finalTimer);
     }
+    
+    // The regular cycle for all other languages
+    if (currentLanguageIndex < languages.length) {
+      const timer = setTimeout(() => {
+        setAnimationClass("animate-fade-out");
+        setTimeout(() => {
+          setCurrentLanguageIndex((prev) => prev + 1);
+          setAnimationClass("animate-fade-in");
+        }, FADE_OUT_DURATION);
+      }, LANGUAGE_DISPLAY_DURATION);
 
-    const timer = setTimeout(() => {
-      setAnimationClass("animate-fade-out");
-      setTimeout(() => {
-        setCurrentLanguageIndex((prev) => prev + 1);
-        setAnimationClass("animate-fade-in");
-      }, FADE_OUT_DURATION);
-    }, LANGUAGE_DISPLAY_DURATION);
-
-    return () => clearTimeout(timer);
+      return () => clearTimeout(timer);
+    }
   }, [currentLanguageIndex, onComplete]);
 
   return (
