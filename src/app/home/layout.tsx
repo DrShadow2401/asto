@@ -1,6 +1,6 @@
 "use client";
 
-import Starfield from "@/components/starfield";
+import { StarsBackground } from "@/components/ui/stars";
 
 export default function HomeLayout({
   children,
@@ -8,9 +8,8 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
-      <Starfield count={1000} />
+    <StarsBackground>
       <div className="relative z-10">{children}</div>
-    </div>
+    </StarsBackground>
   );
 }
