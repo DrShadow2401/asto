@@ -13,8 +13,8 @@ const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
 
   useEffect(() => {
     if (currentLanguageIndex >= languages.length) {
-      // Short delay before transitioning to give the last word some screen time
-      const finalTimer = setTimeout(onComplete, 100); 
+      // After the last language, complete the transition immediately.
+      const finalTimer = setTimeout(onComplete, FADE_OUT_DURATION);
       return () => clearTimeout(finalTimer);
     }
 
@@ -23,7 +23,7 @@ const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
       setTimeout(() => {
         setCurrentLanguageIndex((prev) => prev + 1);
         setAnimationClass("animate-fade-in");
-      }, FADE_OUT_DURATION); 
+      }, FADE_OUT_DURATION);
     }, LANGUAGE_DISPLAY_DURATION);
 
     return () => clearTimeout(timer);
