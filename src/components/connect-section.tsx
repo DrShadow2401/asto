@@ -62,7 +62,7 @@ const ConnectSection = ({ show }: { show: boolean }) => {
         style={{ animationDelay: '800ms' }}
       >
         <a
-          href="https://www.linkedin.com/in/suhani-arya-b10990364"
+          href="https://www.linkedin.com/in/questonin"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn Profile"
@@ -74,7 +74,7 @@ const ConnectSection = ({ show }: { show: boolean }) => {
           />
         </a>
         <p className="text-foreground/80 text-lg">
-          suhaniastoeterna@gmail.com
+          questonin.official@gmail.com
         </p>
       </div>
     </section>
