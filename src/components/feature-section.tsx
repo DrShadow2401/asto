@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { 
   Link, 
@@ -13,8 +13,8 @@ import {
   Library, 
   FlaskConical, 
   LifeBuoy,
-  ChevronLeft,
-  ChevronRight
+  ChevronUp,
+  ChevronDown
 } from "lucide-react";
 
 const projects = [
@@ -28,7 +28,6 @@ const projects = [
     title: "Fionum",
     description: "A judgment-free app to express heavy feelings, find grounding, and regain clarity with gentle support.",
     href: "https://fionum.com",
-    icon: "https://fionum.com", // Keeping reference as per previous request
     actualIcon: LifeBuoy,
   },
   {
@@ -73,17 +72,17 @@ const FeatureSection = ({ show }: { show: boolean }) => {
   const [index, setIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  const rotateY = useMemo(() => {
+  // Rotation around X-axis for vertical movement
+  const rotateX = useMemo(() => {
     const anglePerSide = 360 / projects.length;
-    return index * -anglePerSide;
+    return index * anglePerSide; // North to South logic
   }, [index]);
 
-  // Radius of the prism
+  // Radius of the prism based on card height for vertical rotation
   const translateZ = useMemo(() => {
-    // Width of card is roughly 600-800px on desktop
-    // Formula: (width / 2) / tan(Math.PI / N)
-    const cardWidth = 800; 
-    return Math.round((cardWidth / 2) / Math.tan(Math.PI / projects.length));
+    // Height of card is roughly 400-500px
+    const cardHeight = 450; 
+    return Math.round((cardHeight / 2) / Math.tan(Math.PI / projects.length));
   }, []);
 
   const paginate = (newDirection: number) => {
@@ -104,24 +103,24 @@ const FeatureSection = ({ show }: { show: boolean }) => {
   return (
     <section
       className={cn(
-        "w-full min-h-[90vh] bg-[#000000] flex flex-col items-center justify-center relative overflow-hidden transition-opacity duration-1000 py-20",
+        "w-full min-h-screen bg-[#000000] flex flex-col items-center justify-center relative overflow-hidden transition-opacity duration-1000 py-20",
         show ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
     >
       <div className="w-full max-w-6xl px-4 flex flex-col items-center">
         {/* 3D Scene Container */}
         <div 
-          className="relative w-full h-[500px] flex items-center justify-center perspective-[2000px]"
+          className="relative w-full h-[600px] flex items-center justify-center perspective-[3000px]"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
           {/* Rotating Prism */}
           <motion.div
-            animate={{ rotateY }}
+            animate={{ rotateX }}
             transition={{
               type: "spring",
-              stiffness: 40,
-              damping: 14,
+              stiffness: 35,
+              damping: 12,
               mass: 1
             }}
             style={{ transformStyle: "preserve-3d" }}
@@ -136,13 +135,13 @@ const FeatureSection = ({ show }: { show: boolean }) => {
                 <div
                   key={i}
                   style={{
-                    transform: `rotateY(${angle}deg) translateZ(${translateZ}px)`,
+                    transform: `rotateX(${-angle}deg) translateZ(${translateZ}px)`,
                     backfaceVisibility: "hidden",
                     position: "absolute",
                   }}
                   className={cn(
-                    "w-full max-w-[700px] aspect-[16/9] md:aspect-[21/9] transition-opacity duration-500 px-4",
-                    isActive ? "opacity-100" : "opacity-20"
+                    "w-full max-w-[700px] aspect-[16/9] transition-opacity duration-500 px-4",
+                    isActive ? "opacity-100 scale-100" : "opacity-10 scale-90"
                   )}
                 >
                   <div className="group relative w-full h-full bg-white/[0.02] backdrop-blur-3xl border border-white/10 rounded-[24px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center p-8 md:p-12 transition-all duration-500 hover:border-accent/30">
@@ -179,24 +178,24 @@ const FeatureSection = ({ show }: { show: boolean }) => {
         </div>
 
         {/* Navigation Controls */}
-        <div className="flex flex-col items-center gap-8 mt-16 z-20">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col items-center gap-8 mt-12 z-20">
+          <div className="flex flex-col items-center gap-3">
             <button
               onClick={() => paginate(-1)}
-              className="px-6 py-2 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/40 hover:text-white hover:border-accent/50 hover:bg-accent/5 transition-all duration-300 backdrop-blur-sm"
+              className="px-8 py-2 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/40 hover:text-white hover:border-accent/50 hover:bg-accent/5 transition-all duration-300 backdrop-blur-sm"
               aria-label="Previous project"
             >
-              <ChevronLeft size={20} className="mr-2" />
+              <ChevronUp size={20} className="mr-2" />
               <span className="text-sm font-medium">Prev</span>
             </button>
             
             <button
               onClick={() => paginate(1)}
-              className="px-6 py-2 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/40 hover:text-white hover:border-accent/50 hover:bg-accent/5 transition-all duration-300 backdrop-blur-sm"
+              className="px-8 py-2 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/40 hover:text-white hover:border-accent/50 hover:bg-accent/5 transition-all duration-300 backdrop-blur-sm"
               aria-label="Next project"
             >
               <span className="text-sm font-medium">Next</span>
-              <ChevronRight size={20} className="ml-2" />
+              <ChevronDown size={20} className="ml-2" />
             </button>
           </div>
 
