@@ -1,6 +1,6 @@
 "use client";
 
-import { StarsBackground } from "@/components/ui/stars";
+import { TextWallBackground } from "@/components/ui/text-wall";
 
 export default function HomeLayout({
   children,
@@ -8,8 +8,8 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <StarsBackground>
-      <div className="relative z-10">{children}</div>
-    </StarsBackground>
+    <TextWallBackground>
+      <div className="relative z-10 min-h-screen">{children}</div>
+    </TextWallBackground>
   );
 }
