@@ -366,5 +366,3 @@ export const CircularTestimonials = ({
     </div>
   );
 };
-
-export default CircularTestimonials;
