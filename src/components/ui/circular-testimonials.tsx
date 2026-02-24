@@ -53,10 +53,10 @@ export const CircularTestimonials = ({
   colors = {},
   fontSizes = {},
 }: CircularTestimonialsProps) => {
-  // Color & font config
+  // Color & font config - Optimized for Black Background
   const colorName = colors.name ?? "#fff";
-  const colorDesignation = colors.designation ?? "#6b7280";
-  const colorTestimony = colors.testimony ?? "#94a3b8";
+  const colorDesignation = colors.designation ?? "#94a3b8";
+  const colorTestimony = colors.testimony ?? "#cbd5e1";
   const colorArrowBg = colors.arrowBackground ?? "#141414";
   const colorArrowFg = colors.arrowForeground ?? "#f1f1f7";
   const colorArrowHoverBg = colors.arrowHoverBackground ?? "hsl(var(--accent))";
@@ -144,7 +144,7 @@ export const CircularTestimonials = ({
     if (isLeft) {
       return {
         zIndex: 2,
-        opacity: 0.4,
+        opacity: 0.5,
         pointerEvents: "auto",
         transform: `translateX(-${gap}px) translateY(-${maxStickUp}px) scale(0.8) rotateY(25deg)`,
         transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
@@ -153,7 +153,7 @@ export const CircularTestimonials = ({
     if (isRight) {
       return {
         zIndex: 2,
-        opacity: 0.4,
+        opacity: 0.5,
         pointerEvents: "auto",
         transform: `translateX(${gap}px) translateY(-${maxStickUp}px) scale(0.8) rotateY(-25deg)`,
         transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
@@ -168,8 +168,8 @@ export const CircularTestimonials = ({
     };
   }
 
-  // Framer Motion variants for quote
-  const quoteVariants = {
+  // Framer Motion variants for text content
+  const contentVariants = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: -20 },
@@ -186,7 +186,6 @@ export const CircularTestimonials = ({
                 src={testimonial.src}
                 alt={testimonial.name}
                 className="testimonial-image"
-                data-index={index}
               />
               <div className="image-overlay" />
             </div>
@@ -197,11 +196,11 @@ export const CircularTestimonials = ({
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
-              variants={quoteVariants}
+              variants={contentVariants}
               initial="initial"
               animate="animate"
               exit="exit"
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
             >
               <h3
                 className="name font-bold tracking-tight"
@@ -210,13 +209,13 @@ export const CircularTestimonials = ({
                 {activeTestimonial.name}
               </h3>
               <p
-                className="designation font-medium"
+                className="designation font-medium uppercase tracking-widest opacity-60"
                 style={{ color: colorDesignation, fontSize: fontSizeDesignation }}
               >
                 {activeTestimonial.designation}
               </p>
-              <div className="quote-container mt-6">
-                <motion.p
+              <div className="mt-6">
+                <p
                   className="quote leading-relaxed"
                   style={{ color: colorTestimony, fontSize: fontSizeQuote }}
                 >
@@ -243,9 +242,9 @@ export const CircularTestimonials = ({
                       {word}&nbsp;
                     </motion.span>
                   ))}
-                </motion.p>
+                </p>
               </div>
-              
+
               {activeTestimonial.href && (
                 <motion.div 
                   initial={{ opacity: 0, y: 10 }}
@@ -257,10 +256,10 @@ export const CircularTestimonials = ({
                     href={activeTestimonial.href} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors font-medium"
+                    className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors font-semibold"
                   >
-                    Explore Project 
-                    <span className="text-sm">→</span>
+                    View Project 
+                    <span className="text-xl">→</span>
                   </a>
                 </motion.div>
               )}
@@ -277,7 +276,7 @@ export const CircularTestimonials = ({
               onMouseLeave={() => setHoverPrev(false)}
               aria-label="Previous project"
             >
-              <FaArrowLeft size={20} color={hoverPrev ? "#000" : colorArrowFg} />
+              <FaArrowLeft size={24} color={hoverPrev ? "#000" : colorArrowFg} />
             </button>
             <button
               className="arrow-button next-button"
@@ -289,7 +288,7 @@ export const CircularTestimonials = ({
               onMouseLeave={() => setHoverNext(false)}
               aria-label="Next project"
             >
-              <FaArrowRight size={20} color={hoverNext ? "#000" : colorArrowFg} />
+              <FaArrowRight size={24} color={hoverNext ? "#000" : colorArrowFg} />
             </button>
           </div>
         </div>
@@ -317,14 +316,15 @@ export const CircularTestimonials = ({
           height: 100%;
           border-radius: 2rem;
           overflow: hidden;
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
           background: #111;
+          border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .testimonial-image {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          opacity: 0.8;
+          opacity: 0.85;
         }
         .image-overlay {
           position: absolute;
@@ -337,21 +337,10 @@ export const CircularTestimonials = ({
           justify-content: center;
           padding: 0 1rem;
         }
-        .name {
-          margin-bottom: 0.5rem;
-        }
-        .designation {
-          opacity: 0.6;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-        }
-        .quote-container {
-          max-width: 32rem;
-        }
         .arrow-buttons {
           display: flex;
-          gap: 1rem;
-          margin-top: 3rem;
+          gap: 1.5rem;
+          margin-top: 3.5rem;
         }
         .arrow-button {
           width: 3.5rem;
