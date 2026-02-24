@@ -15,16 +15,16 @@ export default function HomePage() {
         </div>
 
         {/* Content Overlay */}
-        <div className="relative z-10 flex flex-col items-center text-center max-w-4xl pointer-events-none">
+        <div className="relative z-10 flex flex-col items-start text-left w-full max-w-7xl pointer-events-none px-6 md:px-12">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
             <h1 className="text-6xl sm:text-7xl md:text-9xl font-bold text-foreground font-headline tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
               Questonin
             </h1>
-            <p className="mt-6 text-xl md:text-2xl text-foreground/60 font-light tracking-wide max-w-2xl mx-auto">
+            <p className="mt-6 text-xl md:text-2xl text-foreground/60 font-light tracking-wide max-w-2xl">
               Hi I'm Suhani, I build ideas into reality.
             </p>
           </motion.div>
