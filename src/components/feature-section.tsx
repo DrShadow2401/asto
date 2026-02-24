@@ -1,207 +1,78 @@
-
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
-import { motion } from "motion/react";
+import React from "react";
+import { CircularTestimonials } from "@/components/ui/circular-testimonials";
 import { cn } from "@/lib/utils";
-import { 
-  Link, 
-  Repeat, 
-  Target, 
-  Flame, 
-  BrainCircuit, 
-  Library, 
-  FlaskConical, 
-  LifeBuoy
-} from "lucide-react";
 
 const projects = [
   {
-    title: "Atomican",
-    description: "A virtual chemistry lab to run experiments without limits.",
+    name: "Atomican",
+    quote: "A virtual chemistry lab designed for high-end digital experimentation. Run complex simulations and experiments without physical limits, powered by accurate chemical models.",
+    designation: "Education • Simulation",
     href: "https://atomican.com",
-    icon: FlaskConical,
+    src: "https://picsum.photos/seed/atom/800/600",
   },
   {
-    title: "Fionum",
-    description: "A judgment-free space to express heavy feelings.",
+    name: "Fionum",
+    quote: "A judgment-free digital space built for heavy emotional expression. Connect with others in a serene environment designed specifically for mental well-being and release.",
+    designation: "Mental Health • Community",
     href: "https://fionum.com",
-    icon: LifeBuoy,
+    src: "https://picsum.photos/seed/fio/800/600",
   },
   {
-    title: "Tether",
-    description: "A connection tracker with AI-powered nudges for relationships.",
+    name: "Tether",
+    quote: "A relationship connection tracker that uses AI to provide gentle nudges and insights, helping you maintain and strengthen your most important human connections.",
+    designation: "AI • Social",
     href: "https://tether4646464.vercel.app/",
-    icon: Link,
+    src: "https://picsum.photos/seed/teth/800/600",
   },
   {
-    title: "Drillzy",
-    description: "Build one new skill at a time with daily micro-challenges.",
+    name: "Drillzy",
+    quote: "Focus on building one new skill at a time through daily micro-challenges. Designed for consistent growth without the overwhelm of traditional learning platforms.",
+    designation: "EdTech • Productivity",
     href: "https://drillzy-etpo.vercel.app/",
-    icon: Target,
+    src: "https://picsum.photos/seed/drill/800/600",
   },
   {
-    title: "Tranzoid",
-    description: "Translate entire codebases between languages with AI.",
+    name: "Tranzoid",
+    quote: "An enterprise-grade AI tool that translates entire codebases between programming languages while preserving logic, architecture, and documentation standards.",
+    designation: "AI • Developer Tools",
     href: "https://tranzoid.com",
-    icon: Repeat,
+    src: "https://picsum.photos/seed/tranz/800/600",
   },
   {
-    title: "Ashground",
-    description: "Write it, burn it—your private digital space to release.",
+    name: "Ashground",
+    quote: "Your private digital space to write and release. The 'burn after reading' philosophy translated into a calming, interactive journaling experience.",
+    designation: "Mindfulness • Privacy",
     href: "https://ashground.com",
-    icon: Flame,
+    src: "https://picsum.photos/seed/ash/800/600",
   },
   {
-    title: "Norskmind",
-    description: "Journey through Norwegian intellectual history.",
+    name: "Norskmind",
+    quote: "Explore the deep corridors of Norwegian intellectual history. A curated journey through philosophy, art, and the thinkers who shaped the Nordic mind.",
+    designation: "History • Philosophy",
     href: "https://norskmind.com",
-    icon: BrainCircuit,
+    src: "https://picsum.photos/seed/norsk/800/600",
   },
   {
-    title: "Italymind",
-    description: "Discover the rich history of Italian philosophy.",
+    name: "Italymind",
+    quote: "Dive into the rich tapestry of Italian philosophical thought. From classical origins to modern theories, explore the intellectual legacy of Italy.",
+    designation: "History • Philosophy",
     href: "https://italymind.com",
-    icon: Library,
+    src: "https://picsum.photos/seed/italy/800/600",
   },
 ];
 
 const FeatureSection = ({ show }: { show: boolean }) => {
-  const [index, setIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-
-  const rotateX = useMemo(() => {
-    const anglePerSide = 360 / projects.length;
-    return index * anglePerSide;
-  }, [index]);
-
-  const translateZ = useMemo(() => {
-    const cardHeight = 400; 
-    return Math.round((cardHeight / 2) / Math.tan(Math.PI / projects.length));
-  }, []);
-
-  const paginate = (newDirection: number) => {
-    setIndex((prev) => prev + newDirection);
-  };
-
-  useEffect(() => {
-    if (!isHovered && show) {
-      const timer = setInterval(() => {
-        paginate(1);
-      }, 5000);
-      return () => clearInterval(timer);
-    }
-  }, [isHovered, show, index]);
-
-  const currentIndex = ((index % projects.length) + projects.length) % projects.length;
-
   return (
     <section
       className={cn(
-        "w-full min-h-screen bg-[#000000] flex flex-col items-center justify-center relative overflow-hidden transition-opacity duration-1000 py-20",
+        "w-full min-h-screen bg-[#000000] flex flex-col items-center justify-center relative overflow-hidden transition-opacity duration-1000 py-32",
         show ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
     >
-      <div className="w-full max-w-6xl px-4 flex flex-col items-center">
-        {/* 3D Scene Container */}
-        <div 
-          className="relative w-full h-[500px] flex items-center justify-center perspective-[1500px]"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          {/* Rotating Prism */}
-          <motion.div
-            animate={{ rotateX }}
-            transition={{
-              type: "spring",
-              stiffness: 40,
-              damping: 15,
-              mass: 1
-            }}
-            style={{ transformStyle: "preserve-3d" }}
-            className="relative w-full max-w-[600px] h-full flex items-center justify-center"
-          >
-            {projects.map((project, i) => {
-              const angle = (360 / projects.length) * i;
-              const isActive = i === currentIndex;
-              const Icon = project.icon;
-
-              return (
-                <div
-                  key={i}
-                  style={{
-                    transform: `rotateX(${-angle}deg) translateZ(${translateZ}px)`,
-                    backfaceVisibility: "hidden",
-                    position: "absolute",
-                  }}
-                  className={cn(
-                    "w-full max-w-[500px] h-[350px] transition-all duration-700 px-4",
-                    isActive ? "opacity-100 scale-100" : "opacity-20 scale-95"
-                  )}
-                >
-                  <div className="group relative w-full h-full bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[20px] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center p-8 transition-all duration-500 hover:border-accent/40">
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent pointer-events-none" />
-                    
-                    <div className="relative z-10 flex flex-col items-center text-center">
-                      <div className="mb-6 p-4 rounded-full bg-white/[0.03] border border-white/5 group-hover:scale-110 transition-transform duration-500">
-                        {Icon && <Icon className="w-10 h-10 text-accent" />}
-                      </div>
-                      
-                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
-                        {project.title}
-                      </h3>
-                      
-                      <p className="text-white/40 text-sm md:text-base mb-6 leading-relaxed max-w-xs">
-                        {project.description}
-                      </p>
-                      
-                      <a
-                        href={project.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-6 py-2 rounded-full border border-white/10 bg-white/5 text-white/80 text-xs font-medium hover:bg-white hover:text-black hover:border-white transition-all duration-300"
-                      >
-                        View Project
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </motion.div>
-        </div>
-
-        {/* Navigation Controls (Side-by-side Pills) */}
-        <div className="flex items-center justify-center gap-3 mt-16 z-20">
-          <button
-            onClick={() => paginate(-1)}
-            className="px-6 py-1.5 rounded-full border border-white/20 bg-white/5 text-black hover:text-white dark:text-white/80 hover:bg-white/10 transition-all duration-300 text-sm font-medium"
-            aria-label="Previous project"
-          >
-            Prev
-          </button>
-          
-          <button
-            onClick={() => paginate(1)}
-            className="px-6 py-1.5 rounded-full border border-white/20 bg-white/5 text-black hover:text-white dark:text-white/80 hover:bg-white/10 transition-all duration-300 text-sm font-medium"
-            aria-label="Next project"
-          >
-            Next
-          </button>
-        </div>
-
-        {/* Minimal Progress Dots */}
-        <div className="flex gap-2 mt-8">
-          {projects.map((_, i) => (
-            <div
-              key={i}
-              className={cn(
-                "h-1 rounded-full transition-all duration-500",
-                currentIndex === i ? "w-6 bg-accent" : "w-1 bg-white/10"
-              )}
-            />
-          ))}
-        </div>
+      <div className="w-full max-w-7xl px-6 md:px-12">
+        <CircularTestimonials testimonials={projects} autoplay={true} />
       </div>
     </section>
   );
