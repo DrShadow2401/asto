@@ -1,3 +1,4 @@
+
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
@@ -446,7 +447,7 @@ export function SpiralAnimation() {
     }, [dimensions])
     
     return (
-        <div className="relative w-full h-full">
+        <div className="fixed inset-0 w-full h-full z-0 pointer-events-none">
             <canvas
                 ref={canvasRef}
                 className="absolute inset-0 w-full h-full"

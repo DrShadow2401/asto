@@ -36,7 +36,7 @@ const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
   }, [index, onComplete, isDone]);
 
   return (
-    <section className="flex h-screen w-full flex-col items-center justify-center bg-black fixed inset-0 z-[100]">
+    <section className="flex h-screen w-full flex-col items-center justify-center bg-transparent fixed inset-0 z-[100] pointer-events-none">
       <div className="flex h-40 items-center justify-center">
         <h1
           className={cn(
