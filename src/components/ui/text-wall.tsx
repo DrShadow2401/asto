@@ -12,7 +12,8 @@ const TECH_STRINGS = [
   "lk4RtnEhRtE451Gnyf7yjIwCLZifJyHhmE74bHyy1fsNg8UEycKJYqZpPxrScMgvOmXsKJ",
   "gJXcPvZR3jBAtwgrcuQvCvAp5QaJcECfmSuQrx8a3n7QS24fmT8YBpRrCRWnr9weY0IvfcHI",
   "K", "e", "0", "0", "9", "zx", "GY98L", "VTZd7Km6Ib", "eRzBVyJH3Kn2epec5uf",
-  "WyBZsbLX2L0PrlOcPJgn60b3I0snMU05mhQde4"
+  "WyBZsbLX2L0PrlOcPJgn60b3I0snMU05mhQde4", "PROTOCOL", "CORE", "SYNC", "NODE", "INTERFACE",
+  "0x1", "0x0", "v4.0.2", "STABLE", "INIT", "DECRYPT", "VOID", "NULL", "FLOAT"
 ];
 
 interface TextFragmentProps {
@@ -62,7 +63,7 @@ const TextFragment = ({
         userSelect: "none",
         whiteSpace: "nowrap",
       }}
-      className="font-code font-bold tracking-widest text-white/20"
+      className="font-code font-bold tracking-[0.2em] text-white"
     >
       {text}
     </motion.div>
@@ -74,22 +75,22 @@ export const TextWallBackground = ({ children }: { children?: React.ReactNode })
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const generated = Array.from({ length: 50 }).map((_, i) => {
-      const isLargeBlock = i < 5; // First few are the long hashes
-      const isWord = i >= 5 && i < 15; // Next few are the core words
+    const generated = Array.from({ length: 80 }).map((_, i) => {
+      const isLargeBlock = i < 10; 
+      const isWord = i >= 10 && i < 30;
       
       return {
         id: i,
         text: TECH_STRINGS[i % TECH_STRINGS.length],
-        delay: Math.random() * 10,
-        duration: 20 + Math.random() * 30,
-        startX: isLargeBlock ? (60 + Math.random() * 30) : (Math.random() * 100),
-        startY: isLargeBlock ? (70 + Math.random() * 20) : (Math.random() * 100),
-        fontSize: isWord ? (18 + Math.random() * 12) : (10 + Math.random() * 8),
-        opacity: isWord ? (0.15 + Math.random() * 0.1) : (0.05 + Math.random() * 0.05),
-        blur: Math.random() * 2,
-        targetXOffset: Math.random() * 4 - 2,
-        targetYOffset: Math.random() * 6 - 3,
+        delay: Math.random() * -20, // Negative delay to start immediately mid-cycle
+        duration: 30 + Math.random() * 40,
+        startX: Math.random() * 100,
+        startY: Math.random() * 100,
+        fontSize: isWord ? (14 + Math.random() * 8) : (8 + Math.random() * 6),
+        opacity: isWord ? (0.06 + Math.random() * 0.06) : (0.03 + Math.random() * 0.04),
+        blur: Math.random() * 3,
+        targetXOffset: Math.random() * 10 - 5,
+        targetYOffset: Math.random() * 14 - 7,
       };
     });
     setFragments(generated);
@@ -106,7 +107,7 @@ export const TextWallBackground = ({ children }: { children?: React.ReactNode })
       </div>
 
       {/* Subtle Noise/Grain Overlay */}
-      <div className="pointer-events-none absolute inset-0 z-10 opacity-[0.05] mix-blend-overlay">
+      <div className="pointer-events-none absolute inset-0 z-10 opacity-[0.03] mix-blend-overlay">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           <filter id="noiseFilter">
             <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
@@ -115,8 +116,8 @@ export const TextWallBackground = ({ children }: { children?: React.ReactNode })
         </svg>
       </div>
 
-      {/* Radial Vignette */}
-      <div className="pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.9)_100%)]" />
+      {/* Deep Radial Vignette */}
+      <div className="pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.95)_100%)]" />
 
       {/* Content Container */}
       <div className="relative z-30 w-full">
