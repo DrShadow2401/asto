@@ -1,12 +1,21 @@
 
 [
   {
+    "id": "tether",
+    "name": "Tether",
+    "quote": "A relationship connection tracker that uses AI to provide gentle nudges and insights, helping you maintain and strengthen your most important human connections.",
+    "designation": "AI • Social",
+    "href": "https://tether4646464.vercel.app/",
+    "src": "/projects/tether.png",
+    "aiHint": "Abstract logo"
+  },
+  {
     "id": "atomican",
     "name": "Atomican",
     "quote": "A virtual chemistry lab designed for high-end digital experimentation. Run complex simulations and experiments without physical limits, powered by accurate chemical models.",
     "designation": "Education • Simulation",
     "href": "https://atomican.com",
-    "src": "https://picsum.photos/seed/atom/800/600",
+    "src": "/projects/atomican.png",
     "aiHint": "Chemistry lab"
   },
   {
@@ -15,17 +24,8 @@
     "quote": "A judgment-free digital space built for heavy emotional expression. Connect with others in a serene environment designed specifically for mental well-being and release.",
     "designation": "Mental Health • Community",
     "href": "https://fionum.com",
-    "src": "https://picsum.photos/seed/fio/800/600",
+    "src": "/projects/fionum.png",
     "aiHint": "Calm space"
-  },
-  {
-    "id": "tether",
-    "name": "Tether",
-    "quote": "A relationship connection tracker that uses AI to provide gentle nudges and insights, helping you maintain and strengthen your most important human connections.",
-    "designation": "AI • Social",
-    "href": "https://tether4646464.vercel.app/",
-    "src": "https://picsum.photos/seed/tether-logo/800/800",
-    "aiHint": "Abstract logo"
   },
   {
     "id": "drillzy",
@@ -33,7 +33,7 @@
     "quote": "Focus on building one new skill at a time through daily micro-challenges. Designed for consistent growth without the overwhelm of traditional learning platforms.",
     "designation": "EdTech • Productivity",
     "href": "https://drillzy-etpo.vercel.app/",
-    "src": "https://picsum.photos/seed/drill/800/600",
+    "src": "/projects/drillzy.png",
     "aiHint": "Skill building"
   },
   {
@@ -42,7 +42,7 @@
     "quote": "An enterprise-grade AI tool that translates entire codebases between programming languages while preserving logic, architecture, and documentation standards.",
     "designation": "AI • Developer Tools",
     "href": "https://tranzoid.com",
-    "src": "https://picsum.photos/seed/tranz/800/600",
+    "src": "/projects/tranzoid.png",
     "aiHint": "Code translation"
   },
   {
@@ -51,7 +51,7 @@
     "quote": "Your private digital space to write and release. The 'burn after reading' philosophy translated into a calming, interactive journaling experience.",
     "designation": "Mindfulness • Privacy",
     "href": "https://ashground.com",
-    "src": "https://picsum.photos/seed/ash/800/600",
+    "src": "/projects/ashground.png",
     "aiHint": "Burning paper"
   },
   {
@@ -60,7 +60,7 @@
     "quote": "Explore the deep corridors of Norwegian intellectual history. A curated journey through philosophy, art, and the thinkers who shaped the Nordic mind.",
     "designation": "History • Philosophy",
     "href": "https://norskmind.com",
-    "src": "https://picsum.photos/seed/norsk/800/600",
+    "src": "/projects/norsk.png",
     "aiHint": "Nordic landscape"
   },
   {
@@ -69,7 +69,7 @@
     "quote": "Dive into the rich tapestry of Italian philosophical thought. From classical origins to modern theories, explore the intellectual legacy of Italy.",
     "designation": "History • Philosophy",
     "href": "https://italymind.com",
-    "src": "https://picsum.photos/seed/italy/800/600",
+    "src": "/projects/italy.png",
     "aiHint": "Classical Italy"
   }
 ]

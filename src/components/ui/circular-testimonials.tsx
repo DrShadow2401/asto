@@ -1,3 +1,4 @@
+
 "use client";
 import React, {
   useEffect,
@@ -40,8 +41,8 @@ interface CircularTestimonialsProps {
 function calculateGap(width: number) {
   const minWidth = 1024;
   const maxWidth = 1456;
-  const minGap = 60;
-  const maxGap = 86;
+  const minGap = 120;
+  const maxGap = 180;
   if (width <= minWidth) return minGap;
   if (width >= maxWidth)
     return Math.max(minGap, maxGap + 0.06018 * (width - maxWidth));
@@ -54,18 +55,16 @@ export const CircularTestimonials = ({
   colors = {},
   fontSizes = {},
 }: CircularTestimonialsProps) => {
-  // Color & font config
   const colorName = colors.name ?? "#fff";
-  const colorDesignation = colors.designation ?? "#94a3b8";
-  const colorTestimony = colors.testimony ?? "#cbd5e1";
-  const colorArrowBg = colors.arrowBackground ?? "#141414";
-  const colorArrowFg = colors.arrowForeground ?? "#f1f1f7";
-  const colorArrowHoverBg = colors.arrowHoverBackground ?? "hsl(var(--accent))";
-  const fontSizeName = fontSizes.name ?? "2.5rem";
-  const fontSizeDesignation = fontSizes.designation ?? "1rem";
-  const fontSizeQuote = fontSizes.quote ?? "1.125rem";
+  const colorDesignation = colors.designation ?? "rgba(255,255,255,0.5)";
+  const colorTestimony = colors.testimony ?? "rgba(255,255,255,0.8)";
+  const colorArrowBg = colors.arrowBackground ?? "#1a1a1a";
+  const colorArrowFg = colors.arrowForeground ?? "#fff";
+  const colorArrowHoverBg = colors.arrowHoverBackground ?? "hsl(var(--primary))";
+  const fontSizeName = fontSizes.name ?? "2rem";
+  const fontSizeDesignation = fontSizes.designation ?? "0.9rem";
+  const fontSizeQuote = fontSizes.quote ?? "1.1rem";
 
-  // State
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoverPrev, setHoverPrev] = useState(false);
   const [hoverNext, setHoverNext] = useState(false);
@@ -80,7 +79,6 @@ export const CircularTestimonials = ({
     [activeIndex, testimonials]
   );
 
-  // Responsive gap calculation
   useEffect(() => {
     function handleResize() {
       if (imageContainerRef.current) {
@@ -92,40 +90,27 @@ export const CircularTestimonials = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Autoplay
   useEffect(() => {
     if (autoplay) {
       autoplayIntervalRef.current = setInterval(() => {
         setActiveIndex((prev) => (prev + 1) % testimonialsLength);
-      }, 8000);
+      }, 6000);
     }
     return () => {
       if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
     };
   }, [autoplay, testimonialsLength]);
 
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") handlePrev();
-      if (e.key === "ArrowRight") handleNext();
-    };
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-    // eslint-disable-next-line
-  }, [activeIndex, testimonialsLength]);
-
-  // Navigation handlers
   const handleNext = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % testimonialsLength);
     if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
   }, [testimonialsLength]);
+
   const handlePrev = useCallback(() => {
     setActiveIndex((prev) => (prev - 1 + testimonialsLength) % testimonialsLength);
     if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
   }, [testimonialsLength]);
 
-  // Compute transforms for each image (always show 3: left, center, right)
   function getImageStyle(index: number): React.CSSProperties {
     const gap = calculateGap(containerWidth);
     const isActive = index === activeIndex;
@@ -134,239 +119,113 @@ export const CircularTestimonials = ({
     
     if (isActive) {
       return {
-        zIndex: 3,
+        zIndex: 10,
         opacity: 1,
-        pointerEvents: "auto",
-        transform: `translateX(0px) translateY(0px) scale(1) rotateY(0deg) translateZ(0px)`,
-        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
+        transform: `translateX(0px) translateZ(0px) scale(1) rotateY(0deg)`,
+        filter: 'blur(0px)',
       };
     }
     if (isLeft) {
       return {
-        zIndex: 2,
+        zIndex: 5,
         opacity: 0.4,
-        pointerEvents: "auto",
-        transform: `translateX(-${gap}px) translateY(10px) scale(0.85) rotateY(15deg) translateZ(-150px)`,
-        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
+        transform: `translateX(-${gap}px) translateZ(-200px) scale(0.8) rotateY(25deg)`,
+        filter: 'blur(4px)',
       };
     }
     if (isRight) {
       return {
-        zIndex: 2,
+        zIndex: 5,
         opacity: 0.4,
-        pointerEvents: "auto",
-        transform: `translateX(${gap}px) translateY(10px) scale(0.85) rotateY(-15deg) translateZ(-150px)`,
-        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
+        transform: `translateX(${gap}px) translateZ(-200px) scale(0.8) rotateY(-25deg)`,
+        filter: 'blur(4px)',
       };
     }
-    // Hide all other images
     return {
       zIndex: 1,
       opacity: 0,
-      pointerEvents: "none",
-      transform: `translateX(0px) translateY(0px) scale(0.5) translateZ(-500px)`,
-      transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
+      transform: `translateX(0px) translateZ(-500px) scale(0.5)`,
+      pointerEvents: 'none',
     };
   }
 
-  // Framer Motion variants for text content
-  const contentVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 },
-  };
-
   return (
-    <div className="testimonial-container">
-      <div className="testimonial-grid">
-        {/* Images */}
-        <div className="image-container" ref={imageContainerRef}>
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className="testimonial-image-wrapper" style={getImageStyle(index)}>
-              <img
-                src={testimonial.src}
-                alt={testimonial.name}
-                className="testimonial-image"
-                data-ai-hint={testimonial.aiHint}
-              />
-              <div className="image-overlay" />
-            </div>
-          ))}
-        </div>
-        {/* Content */}
-        <div className="testimonial-content">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIndex}
-              variants={contentVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-            >
-              <h3
-                className="name font-bold tracking-tight"
-                style={{ color: colorName, fontSize: fontSizeName }}
-              >
-                {activeTestimonial.name}
-              </h3>
-              <p
-                className="designation font-medium uppercase tracking-widest opacity-60"
-                style={{ color: colorDesignation, fontSize: fontSizeDesignation }}
-              >
-                {activeTestimonial.designation}
-              </p>
-              <div className="mt-6">
-                <p
-                  className="quote leading-relaxed"
-                  style={{ color: colorTestimony, fontSize: fontSizeQuote }}
-                >
-                  {activeTestimonial.quote.split(" ").map((word, i) => (
-                    <motion.span
-                      key={i}
-                      initial={{
-                        filter: "blur(10px)",
-                        opacity: 0,
-                        y: 5,
-                      }}
-                      animate={{
-                        filter: "blur(0px)",
-                        opacity: 1,
-                        y: 0,
-                      }}
-                      transition={{
-                        duration: 0.3,
-                        ease: "easeInOut",
-                        delay: 0.02 * i,
-                      }}
-                      style={{ display: "inline-block" }}
-                    >
-                      {word}&nbsp;
-                    </motion.span>
-                  ))}
-                </p>
-              </div>
-
-              {activeTestimonial.href && (
-                <motion.div 
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="mt-8"
-                >
-                  <a 
-                    href={activeTestimonial.href} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors font-semibold"
-                  >
-                    View Project 
-                    <span className="text-xl">→</span>
-                  </a>
-                </motion.div>
-              )}
-            </motion.div>
-          </AnimatePresence>
-          <div className="arrow-buttons">
-            <button
-              className="arrow-button prev-button"
-              onClick={handlePrev}
-              style={{
-                backgroundColor: hoverPrev ? colorArrowHoverBg : colorArrowBg,
+    <div className="w-full flex flex-col items-center gap-12">
+      <div className="relative w-full h-[350px] md:h-[450px] flex items-center justify-center perspective-[2000px]" ref={imageContainerRef}>
+        {testimonials.map((testimonial, index) => (
+          <div
+            key={index}
+            className="absolute w-[80%] max-w-[600px] aspect-video rounded-2xl overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] shadow-2xl border border-white/10 bg-zinc-900"
+            style={getImageStyle(index)}
+          >
+            <img
+              src={testimonial.src}
+              alt={testimonial.name}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                // Fallback for missing local images
+                (e.target as HTMLImageElement).src = `https://placehold.co/600x400/1a1a1a/ffffff?text=${testimonial.name}`;
               }}
-              onMouseEnter={() => setHoverPrev(true)}
-              onMouseLeave={() => setHoverPrev(false)}
-              aria-label="Previous project"
-            >
-              <FaArrowLeft size={24} color={hoverPrev ? "#000" : colorArrowFg} />
-            </button>
-            <button
-              className="arrow-button next-button"
-              onClick={handleNext}
-              style={{
-                backgroundColor: hoverNext ? colorArrowHoverBg : colorArrowBg,
-              }}
-              onMouseEnter={() => setHoverNext(true)}
-              onMouseLeave={() => setHoverNext(false)}
-              aria-label="Next project"
-            >
-              <FaArrowRight size={24} color={hoverNext ? "#000" : colorArrowFg} />
-            </button>
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           </div>
+        ))}
+      </div>
+
+      <div className="w-full max-w-2xl text-center px-4">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeIndex}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+          >
+            <h3 className="font-bold tracking-tight mb-1" style={{ color: colorName, fontSize: fontSizeName }}>
+              {activeTestimonial.name}
+            </h3>
+            <p className="uppercase tracking-[0.2em] font-medium mb-6 opacity-60" style={{ color: colorDesignation, fontSize: fontSizeDesignation }}>
+              {activeTestimonial.designation}
+            </p>
+            <p className="leading-relaxed font-light italic" style={{ color: colorTestimony, fontSize: fontSizeQuote }}>
+              "{activeTestimonial.quote}"
+            </p>
+            {activeTestimonial.href && (
+              <a 
+                href={activeTestimonial.href} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block mt-6 text-primary hover:text-primary/80 transition-colors font-semibold border-b border-primary/30 pb-1"
+              >
+                View Project →
+              </a>
+            )}
+          </motion.div>
+        </AnimatePresence>
+
+        <div className="flex justify-center gap-6 mt-10">
+          <button
+            onClick={handlePrev}
+            onMouseEnter={() => setHoverPrev(true)}
+            onMouseLeave={() => setHoverPrev(false)}
+            className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center transition-all hover:scale-110 active:scale-95"
+            style={{ backgroundColor: hoverPrev ? colorArrowHoverBg : colorArrowBg }}
+          >
+            <FaArrowLeft size={18} color={colorArrowFg} />
+          </button>
+          <button
+            onClick={handleNext}
+            onMouseEnter={() => setHoverNext(true)}
+            onMouseLeave={() => setHoverNext(false)}
+            className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center transition-all hover:scale-110 active:scale-95"
+            style={{ backgroundColor: hoverNext ? colorArrowHoverBg : colorArrowBg }}
+          >
+            <FaArrowRight size={18} color={colorArrowFg} />
+          </button>
         </div>
       </div>
-      <style jsx>{`
-        .testimonial-container {
-          width: 100%;
-          max-width: 72rem;
-          margin: 0 auto;
-        }
-        .testimonial-grid {
-          display: grid;
-          gap: 4rem;
-          align-items: center;
-        }
-        .image-container {
-          position: relative;
-          width: 100%;
-          height: 30rem;
-          perspective: 2000px;
-        }
-        .testimonial-image-wrapper {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          border-radius: 2rem;
-          overflow: hidden;
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-          background: #111;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          transform-style: preserve-3d;
-          backface-visibility: hidden;
-        }
-        .testimonial-image {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          opacity: 0.85;
-        }
-        .image-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.4));
-        }
-        .testimonial-content {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          padding: 0 1rem;
-        }
-        .arrow-buttons {
-          display: flex;
-          gap: 1.5rem;
-          margin-top: 3.5rem;
-        }
-        .arrow-button {
-          width: 3.5rem;
-          height: 3.5rem;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          border: 1px solid rgba(255,255,255,0.1);
-        }
-        @media (min-width: 1024px) {
-          .testimonial-grid {
-            grid-template-columns: 1.2fr 1fr;
-            gap: 8rem;
-          }
-          .testimonial-content {
-            padding: 0;
-          }
-        }
-      `}</style>
     </div>
   );
 };
+
+export default CircularTestimonials;
