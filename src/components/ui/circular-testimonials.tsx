@@ -1,4 +1,3 @@
-
 "use client";
 import React, {
   useEffect,
@@ -16,6 +15,7 @@ interface Testimonial {
   designation: string;
   src: string;
   href?: string;
+  aiHint?: string;
 }
 interface Colors {
   name?: string;
@@ -38,9 +38,14 @@ interface CircularTestimonialsProps {
 }
 
 function calculateGap(width: number) {
-  // We want a gap that allows the side cards to "peek out" from behind the center card
-  // A gap of ~15% of the container width creates a nice fanned stack effect
-  return width * 0.15;
+  const minWidth = 1024;
+  const maxWidth = 1456;
+  const minGap = 60;
+  const maxGap = 86;
+  if (width <= minWidth) return minGap;
+  if (width >= maxWidth)
+    return Math.max(minGap, maxGap + 0.06018 * (width - maxWidth));
+  return minGap + (maxGap - minGap) * ((width - minWidth) / (maxWidth - minWidth));
 }
 
 export const CircularTestimonials = ({
@@ -49,7 +54,7 @@ export const CircularTestimonials = ({
   colors = {},
   fontSizes = {},
 }: CircularTestimonialsProps) => {
-  // Color & font config - Optimized for Black Background
+  // Color & font config
   const colorName = colors.name ?? "#fff";
   const colorDesignation = colors.designation ?? "#94a3b8";
   const colorTestimony = colors.testimony ?? "#cbd5e1";
@@ -182,6 +187,7 @@ export const CircularTestimonials = ({
                 src={testimonial.src}
                 alt={testimonial.name}
                 className="testimonial-image"
+                data-ai-hint={testimonial.aiHint}
               />
               <div className="image-overlay" />
             </div>

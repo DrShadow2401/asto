@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "atomican": "https://picsum.photos/seed/atom/800/600",
+    "fionum": "https://picsum.photos/seed/fio/800/600",
+    "tether": "https://picsum.photos/seed/tether-logo/800/800",
+    "drillzy": "https://picsum.photos/seed/drill/800/600",
+    "tranzoid": "https://picsum.photos/seed/tranz/800/600",
+    "ashground": "https://picsum.photos/seed/ash/800/600",
+    "norskmind": "https://picsum.photos/seed/norsk/800/600",
+    "italymind": "https://picsum.photos/seed/italy/800/600"
+  }
+}
