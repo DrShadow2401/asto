@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +20,8 @@ interface TextFragmentProps {
   fontSize: number;
   opacity: number;
   blur: number;
+  targetXOffset: number;
+  targetYOffset: number;
 }
 
 const TextFragment = ({ 
@@ -30,14 +32,16 @@ const TextFragment = ({
   startY, 
   fontSize, 
   opacity, 
-  blur 
+  blur,
+  targetXOffset,
+  targetYOffset
 }: TextFragmentProps) => {
   return (
     <motion.div
       initial={{ x: `${startX}%`, y: `${startY}%`, opacity: 0 }}
       animate={{ 
-        x: [`${startX}%`, `${startX + (Math.random() * 10 - 5)}%`],
-        y: [`${startY}%`, `${startY + (Math.random() * 15 - 7.5)}%`],
+        x: [`${startX}%`, `${startX + targetXOffset}%`],
+        y: [`${startY}%`, `${startY + targetYOffset}%`],
         opacity: [0, opacity, opacity, 0]
       }}
       transition={{
@@ -62,8 +66,11 @@ const TextFragment = ({
 };
 
 export const TextWallBackground = ({ children }: { children?: React.ReactNode }) => {
-  const fragments = useMemo(() => {
-    return Array.from({ length: 40 }).map((_, i) => ({
+  const [fragments, setFragments] = useState<any[]>([]);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const generated = Array.from({ length: 40 }).map((_, i) => ({
       id: i,
       text: TECH_STRINGS[i % TECH_STRINGS.length],
       delay: Math.random() * 10,
@@ -73,14 +80,18 @@ export const TextWallBackground = ({ children }: { children?: React.ReactNode })
       fontSize: 12 + Math.random() * 24,
       opacity: 0.05 + Math.random() * 0.08,
       blur: Math.random() * 3,
+      targetXOffset: Math.random() * 10 - 5,
+      targetYOffset: Math.random() * 15 - 7.5,
     }));
+    setFragments(generated);
+    setMounted(true);
   }, []);
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-[#000000]">
       {/* Background Text Wall Layer */}
       <div className="absolute inset-0 z-0">
-        {fragments.map((f) => (
+        {mounted && fragments.map((f) => (
           <TextFragment key={f.id} {...f} />
         ))}
       </div>
