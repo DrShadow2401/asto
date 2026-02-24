@@ -5,10 +5,14 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 const TECH_STRINGS = [
-  "SYSTEM_INIT", "0x7F2A9C", "ALGORITHM_v4", "NEURAL_SYNC", "PROTOCOL_SECURE",
-  "LATENCY_0.02ms", "ENCRYPT_AES_256", "NODE_ACTIVE", "DATA_STREAM", "SYNAPSE_LINK",
-  "MODULAR_CORE", "SCALABLE_UI", "DECENTRALIZED", "00101101", "UPTIME_99.9%",
-  "AUTH_TOKEN", "CLUSTER_READY", "INTERFACE_v2", "QUANTUM_STABLE", "HASH_SHA256"
+  "For", "Resources", "Lessons", "Blogs", "Original", "Remix",
+  "Vz7InBoEilsUv9NmPLMyOsVU1NPz192HFQ2vjN3HRi5udeXHA5sRtK1reZqFximvKNQBYH",
+  "8cKWcodBQwzAdFHkkxILY24MCXKTTeRpOI9ZvmcfdVnz6pBOq4SRfFdbCSf1hd2vMbGX50Ul",
+  "aoV9hSkmrWum5biYojqNsQsRA2xlQX0CoUvsam1PAG9ZHfLRLD01kwUnu8XFX7nAtm0q9iF",
+  "lk4RtnEhRtE451Gnyf7yjIwCLZifJyHhmE74bHyy1fsNg8UEycKJYqZpPxrScMgvOmXsKJ",
+  "gJXcPvZR3jBAtwgrcuQvCvAp5QaJcECfmSuQrx8a3n7QS24fmT8YBpRrCRWnr9weY0IvfcHI",
+  "K", "e", "0", "0", "9", "zx", "GY98L", "VTZd7Km6Ib", "eRzBVyJH3Kn2epec5uf",
+  "WyBZsbLX2L0PrlOcPJgn60b3I0snMU05mhQde4"
 ];
 
 interface TextFragmentProps {
@@ -58,7 +62,7 @@ const TextFragment = ({
         userSelect: "none",
         whiteSpace: "nowrap",
       }}
-      className="font-code font-bold tracking-widest text-primary/40"
+      className="font-code font-bold tracking-widest text-white/20"
     >
       {text}
     </motion.div>
@@ -70,19 +74,24 @@ export const TextWallBackground = ({ children }: { children?: React.ReactNode })
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const generated = Array.from({ length: 40 }).map((_, i) => ({
-      id: i,
-      text: TECH_STRINGS[i % TECH_STRINGS.length],
-      delay: Math.random() * 10,
-      duration: 15 + Math.random() * 25,
-      startX: Math.random() * 100,
-      startY: Math.random() * 100,
-      fontSize: 12 + Math.random() * 24,
-      opacity: 0.05 + Math.random() * 0.08,
-      blur: Math.random() * 3,
-      targetXOffset: Math.random() * 10 - 5,
-      targetYOffset: Math.random() * 15 - 7.5,
-    }));
+    const generated = Array.from({ length: 50 }).map((_, i) => {
+      const isLargeBlock = i < 5; // First few are the long hashes
+      const isWord = i >= 5 && i < 15; // Next few are the core words
+      
+      return {
+        id: i,
+        text: TECH_STRINGS[i % TECH_STRINGS.length],
+        delay: Math.random() * 10,
+        duration: 20 + Math.random() * 30,
+        startX: isLargeBlock ? (60 + Math.random() * 30) : (Math.random() * 100),
+        startY: isLargeBlock ? (70 + Math.random() * 20) : (Math.random() * 100),
+        fontSize: isWord ? (18 + Math.random() * 12) : (10 + Math.random() * 8),
+        opacity: isWord ? (0.15 + Math.random() * 0.1) : (0.05 + Math.random() * 0.05),
+        blur: Math.random() * 2,
+        targetXOffset: Math.random() * 4 - 2,
+        targetYOffset: Math.random() * 6 - 3,
+      };
+    });
     setFragments(generated);
     setMounted(true);
   }, []);
@@ -97,7 +106,7 @@ export const TextWallBackground = ({ children }: { children?: React.ReactNode })
       </div>
 
       {/* Subtle Noise/Grain Overlay */}
-      <div className="pointer-events-none absolute inset-0 z-10 opacity-[0.03] mix-blend-overlay">
+      <div className="pointer-events-none absolute inset-0 z-10 opacity-[0.05] mix-blend-overlay">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           <filter id="noiseFilter">
             <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
@@ -107,7 +116,7 @@ export const TextWallBackground = ({ children }: { children?: React.ReactNode })
       </div>
 
       {/* Radial Vignette */}
-      <div className="pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.9)_100%)]" />
 
       {/* Content Container */}
       <div className="relative z-30 w-full">
