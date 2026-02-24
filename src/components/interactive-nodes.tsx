@@ -54,7 +54,7 @@ export const InteractiveNodes = () => {
   if (!mounted) return null;
 
   return (
-    <div className="relative w-full h-[600px] flex items-center justify-center overflow-visible select-none">
+    <div className="relative w-full h-[600px] flex items-center justify-center overflow-visible select-none md:translate-x-[15%]">
       {/* Central Anchor Logo */}
       <motion.div 
         className="relative z-20 flex flex-col items-center justify-center"
