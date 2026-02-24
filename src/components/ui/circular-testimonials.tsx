@@ -1,3 +1,4 @@
+
 "use client";
 import React, {
   useEffect,
@@ -37,14 +38,9 @@ interface CircularTestimonialsProps {
 }
 
 function calculateGap(width: number) {
-  const minWidth = 1024;
-  const maxWidth = 1456;
-  const minGap = 60;
-  const maxGap = 86;
-  if (width <= minWidth) return minGap;
-  if (width >= maxWidth)
-    return Math.max(minGap, maxGap + 0.06018 * (width - maxWidth));
-  return minGap + (maxGap - minGap) * ((width - minWidth) / (maxWidth - minWidth));
+  // We want a gap that allows the side cards to "peek out" from behind the center card
+  // A gap of ~15% of the container width creates a nice fanned stack effect
+  return width * 0.15;
 }
 
 export const CircularTestimonials = ({
@@ -127,35 +123,34 @@ export const CircularTestimonials = ({
   // Compute transforms for each image (always show 3: left, center, right)
   function getImageStyle(index: number): React.CSSProperties {
     const gap = calculateGap(containerWidth);
-    const maxStickUp = gap * 0.4;
-    const offset = (index - activeIndex + testimonialsLength) % testimonialsLength;
     const isActive = index === activeIndex;
     const isLeft = (activeIndex - 1 + testimonialsLength) % testimonialsLength === index;
     const isRight = (activeIndex + 1) % testimonialsLength === index;
+    
     if (isActive) {
       return {
         zIndex: 3,
         opacity: 1,
         pointerEvents: "auto",
-        transform: `translateX(0px) translateY(0px) scale(1) rotateY(0deg)`,
+        transform: `translateX(0px) translateY(0px) scale(1) rotateY(0deg) translateZ(0px)`,
         transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
       };
     }
     if (isLeft) {
       return {
         zIndex: 2,
-        opacity: 0.5,
+        opacity: 0.4,
         pointerEvents: "auto",
-        transform: `translateX(-${gap}px) translateY(-${maxStickUp}px) scale(0.8) rotateY(25deg)`,
+        transform: `translateX(-${gap}px) translateY(10px) scale(0.85) rotateY(15deg) translateZ(-150px)`,
         transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
       };
     }
     if (isRight) {
       return {
         zIndex: 2,
-        opacity: 0.5,
+        opacity: 0.4,
         pointerEvents: "auto",
-        transform: `translateX(${gap}px) translateY(-${maxStickUp}px) scale(0.8) rotateY(-25deg)`,
+        transform: `translateX(${gap}px) translateY(10px) scale(0.85) rotateY(-15deg) translateZ(-150px)`,
         transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
       };
     }
@@ -164,6 +159,7 @@ export const CircularTestimonials = ({
       zIndex: 1,
       opacity: 0,
       pointerEvents: "none",
+      transform: `translateX(0px) translateY(0px) scale(0.5) translateZ(-500px)`,
       transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
     };
   }
@@ -319,6 +315,8 @@ export const CircularTestimonials = ({
           box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
           background: #111;
           border: 1px solid rgba(255, 255, 255, 0.1);
+          transform-style: preserve-3d;
+          backface-visibility: hidden;
         }
         .testimonial-image {
           width: 100%;
