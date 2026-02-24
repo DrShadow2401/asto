@@ -4,16 +4,9 @@
 import React from "react";
 import { CircularTestimonials } from "@/components/ui/circular-testimonials";
 import { cn } from "@/lib/utils";
-import placeholders from "@/app/lib/placeholder-images.json";
 import projectsData from "@/app/lib/projects.json";
 
 const FeatureSection = ({ show }: { show: boolean }) => {
-  // Map the project data to include the actual image URLs from the registry
-  const projects = projectsData.map((project: any) => ({
-    ...project,
-    src: placeholders.projects[project.imageKey as keyof typeof placeholders.projects] || placeholders.projects.atomican
-  }));
-
   return (
     <section
       className={cn(
@@ -22,7 +15,7 @@ const FeatureSection = ({ show }: { show: boolean }) => {
       )}
     >
       <div className="w-full max-w-7xl px-6 md:px-12">
-        <CircularTestimonials testimonials={projects} autoplay={true} />
+        <CircularTestimonials testimonials={projectsData} autoplay={true} />
       </div>
     </section>
   );

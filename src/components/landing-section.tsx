@@ -5,20 +5,21 @@ import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 const languages = ["Hello", "Bonjour", "Hola", "Ciao", "Konnichiwa", "Namaste", "你好"];
-const DISPLAY_DURATION = 1000;
+const DISPLAY_DURATION = 800;
 const FADE_DURATION = 200;
 
 const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
   const [index, setIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
-  const hasCompleted = useRef(false);
+  const [isDone, setIsDone] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    if (hasCompleted.current) return;
+    if (isDone) return;
 
-    const showTimer = setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       if (index === languages.length - 1) {
-        hasCompleted.current = true;
+        setIsDone(true);
         onComplete();
       } else {
         setIsVisible(false);
@@ -29,11 +30,13 @@ const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
       }
     }, DISPLAY_DURATION);
 
-    return () => clearTimeout(showTimer);
-  }, [index, onComplete]);
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [index, onComplete, isDone]);
 
   return (
-    <section className="flex h-screen w-full flex-col items-center justify-center bg-black">
+    <section className="flex h-screen w-full flex-col items-center justify-center bg-black fixed inset-0 z-[100]">
       <div className="flex h-40 items-center justify-center">
         <h1
           className={cn(
