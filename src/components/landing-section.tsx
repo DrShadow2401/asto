@@ -11,30 +11,32 @@ const LandingSection = ({ onComplete }: { onComplete: () => void }) => {
   const [currentLanguageIndex, setCurrentLanguageIndex] = useState(0);
   const [animationClass, setAnimationClass] = useState("animate-fade-in");
 
+  // This effect handles the display duration for each word
   useEffect(() => {
-    // When we're on the last language, we want to call onComplete and stop.
-    if (currentLanguageIndex === languages.length -1) {
-       const finalTimer = setTimeout(() => {
-        setAnimationClass("animate-fade-out");
-        // Call onComplete as the last word fades out
-        setTimeout(onComplete, FADE_OUT_DURATION);
-      }, LANGUAGE_DISPLAY_DURATION);
-      return () => clearTimeout(finalTimer);
-    }
-    
-    // The regular cycle for all other languages
-    if (currentLanguageIndex < languages.length) {
+    if (currentLanguageIndex >= languages.length) return;
+
+    const timer = setTimeout(() => {
+      setAnimationClass("animate-fade-out");
+    }, LANGUAGE_DISPLAY_DURATION);
+
+    return () => clearTimeout(timer);
+  }, [currentLanguageIndex]);
+
+  // This effect handles the transition after fade-out completes
+  useEffect(() => {
+    if (animationClass === "animate-fade-out") {
       const timer = setTimeout(() => {
-        setAnimationClass("animate-fade-out");
-        setTimeout(() => {
+        if (currentLanguageIndex === languages.length - 1) {
+          onComplete();
+        } else {
           setCurrentLanguageIndex((prev) => prev + 1);
           setAnimationClass("animate-fade-in");
-        }, FADE_OUT_DURATION);
-      }, LANGUAGE_DISPLAY_DURATION);
+        }
+      }, FADE_OUT_DURATION);
 
       return () => clearTimeout(timer);
     }
-  }, [currentLanguageIndex, onComplete]);
+  }, [animationClass, currentLanguageIndex, onComplete]);
 
   return (
     <section className="flex h-screen w-full flex-col items-center justify-center">
